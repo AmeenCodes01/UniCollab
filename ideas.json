@@ -1,0 +1,91 @@
+[
+  {
+    "title": "Aware extension",
+    "shortDesc": "To prevent impuslive clicking while working.",
+    "desc": "To prevent impuslive clicking while working. Could be an extension or a script. Could be a app that displays a modal with text box as soon as phone unlocks.'What is your intention ?'",
+    "tags": ["extension", "javascript", "2team", "productivity"]
+  },
+  {
+    "title": "Distraction Counter",
+    "shortDesc": "Track reason for distraction and leads to which urge. Implement features for quick focus regain.",
+    "desc": "A website to be opened on the side. Track reason for distraction and leads to which urge. Implement features for quick focus regain. Initially private, later for stats. Goal was to stop from going down the rabbit hole.",
+    "tags": ["productivity", "website", "react", "nextjs"]
+  },
+  {
+    "title": "CheerFriends",
+    "shortDesc": "To display your best wishes for online friends in a visual, meaningful manner.",
+    "desc": "To display your best wishes for friends in a more visual, meaningful manner. Plant stars/laterns/flowers/windmills etc which you tend to every day for your friend. This is a good-luck garden!Give free coins, then earn more through using my streamMap timer.",
+    "tags": ["art", "animations", "website", "nextjs", "forfun"]
+  },
+
+  {
+    "title": "Anger controller",
+    "shortDesc": "A sound sensor with a tiny headphone in your ear.",
+    "desc": "A sound sensor with a tiny headphone in your ear. Smart, to recognise your voice. Tiny. At a certain vol, plays something in ear. ",
+    "tags": ["hardware", "sensor", "machinelearning", "AI", "website"]
+  },
+  {
+    "title": "Distraction Counter",
+    "shortDesc": "Track reason for distraction and leads to which urge. Implement features for quick focus regain.",
+    "desc": "A website to be opened on the side. Track reason for distraction and leads to which urge. Implement features for quick focus regain. Initially private, later for stats. Goal was to stop from going down the rabbit hole.",
+    "tags": ["productivity", "website", "react", "nextjs"]
+  },
+  {
+    "title": "CheerFriends",
+    "shortDesc": "To display your best wishes for online friends in a visual, meaningful manner.",
+    "desc": "To display your best wishes for friends in a more visual, meaningful manner. Plant stars/laterns/flowers/windmills etc which you tend to every day for your friend. This is a good-luck garden!Give free coins, then earn more through using my streamMap timer.",
+    "tags": ["art", "animations", "website", "nextjs", "forfun"]
+  },
+
+  {
+    "title": "Anger controller",
+    "shortDesc": "A sound sensor with a tiny headphone in your ear.",
+    "desc": "A sound sensor with a tiny headphone in your ear. Smart, to recognise your voice. Tiny. At a certain vol, plays something in ear. ",
+    "tags": ["hardware", "sensor", "machinelearning", "AI", "website"]
+  },
+  {
+    "title": "Distraction Counter",
+    "shortDesc": "Track reason for distraction and leads to which urge. Implement features for quick focus regain.",
+    "desc": "A website to be opened on the side. Track reason for distraction and leads to which urge. Implement features for quick focus regain. Initially private, later for stats. Goal was to stop from going down the rabbit hole.",
+    "tags": ["productivity", "website", "react", "nextjs"]
+  },
+  {
+    "title": "CheerFriends",
+    "shortDesc": "To display your best wishes for online friends in a visual, meaningful manner.",
+    "desc": "To display your best wishes for friends in a more visual, meaningful manner. Plant stars/laterns/flowers/windmills etc which you tend to every day for your friend. This is a good-luck garden!Give free coins, then earn more through using my streamMap timer.",
+    "tags": ["art", "animations", "website", "nextjs", "forfun"]
+  },
+
+  {
+    "title": "Anger controller",
+    "shortDesc": "A sound sensor with a tiny headphone in your ear.",
+    "desc": "A sound sensor with a tiny headphone in your ear. Smart, to recognise your voice. Tiny. At a certain vol, plays something in ear. ",
+    "tags": ["hardware", "sensor", "machinelearning", "AI", "website"]
+  },
+  {
+    "title": "Distraction Counter",
+    "shortDesc": "Track reason for distraction and leads to which urge. Implement features for quick focus regain.",
+    "desc": "A website to be opened on the side. Track reason for distraction and leads to which urge. Implement features for quick focus regain. Initially private, later for stats. Goal was to stop from going down the rabbit hole.",
+    "tags": ["productivity", "website", "react", "nextjs"]
+  },
+  {
+    "title": "CheerFriends",
+    "shortDesc": "To display your best wishes for online friends in a visual, meaningful manner.",
+    "desc": "To display your best wishes for friends in a more visual, meaningful manner. Plant stars/laterns/flowers/windmills etc which you tend to every day for your friend. This is a good-luck garden!Give free coins, then earn more through using my streamMap timer.",
+    "tags": ["art", "animations", "website", "nextjs", "forfun"]
+  },
+
+  {
+    "title": "Anger controller",
+    "shortDesc": "A sound sensor with a tiny headphone in your ear.",
+    "desc": "A sound sensor with a tiny headphone in your ear. Smart, to recognise your voice. Tiny. At a certain vol, plays something in ear. ",
+    "tags": ["hardware", "sensor", "machinelearning", "AI", "website"]
+  }
+]
+
+
+
+
+
+
+

@@ -1,0 +1,92 @@
+[
+  {
+    "title": "Plant Disease Detector",
+    "author": "sofia",
+    "course": "Agricultural Science",
+    "year": "3",
+    "shortDesc": "App to identify crop diseases from phone photos.",
+    "description": "As an agriculture student studying plant pathology, I can identify early disease symptoms in crops and have access to training data through my department's research plots. Looking for CS students who can help develop an app where farmers can take photos and get instant disease identification. My knowledge of plant diseases needs to be paired with technical expertise to make this accessible to farmers.",
+    "lookingFor": "#computer_science #mobile_dev #ML #image_processing",
+    "email": "sofia@reading.ac.uk",
+    "meetingFormat": "Weekly field visits + 2hr discussion"
+  },
+  {
+    "title": "Music Practice Assistant",
+    "author": "aisha",
+    "course": "Music",
+    "year": "2",
+    "shortDesc": "App to help music students practice effectively.",
+    "description": "As a music student, I understand common practice challenges and technique development. Want to create an app that helps students structure their practice sessions and provides feedback on rhythm and timing. Looking for CS partners to help with audio processing and app development. I can provide expertise on music theory and practice techniques.",
+    "lookingFor": "#computer_science #audio_processing #mobile_dev",
+    "email": "aisha@reading.ac.uk",
+    "meetingFormat": "Twice weekly, 90min each"
+  },
+
+  {
+    "title": "Language Learning Games",
+    "author": "yuki",
+    "course": "Languages",
+    "year": "2",
+    "shortDesc": "Interactive games for language practice.",
+    "description": "Studying Japanese teaching methods and want to create engaging games for language learning. Have lots of ideas for effective exercises and cultural elements to include, but need CS students to help make them into actual games. Can provide language expertise and teaching methodology.",
+    "lookingFor": "#computer_science #game_dev #education_tech",
+    "email": "yuki@reading.ac.uk",
+    "meetingFormat": "Weekly 2hr development sessions"
+  },
+  {
+    "title": "Sports Performance Analyzer",
+    "author": "james",
+    "course": "Sports Science",
+    "year": "3",
+    "shortDesc": "Tool to analyze athlete movements from video.",
+    "description": "Working with our university's sports teams to improve training. Need help creating a tool that can analyze athlete movements from smartphone videos. Can provide sports biomechanics knowledge and access to athletes for testing, looking for CS students to help with video processing and movement tracking.",
+    "lookingFor": "#computer_science #video_processing #motion_tracking",
+    "email": "james@reading.ac.uk",
+    "meetingFormat": "Bi-weekly training sessions + development time"
+  },
+  {
+    "title": "Historical Document Digitizer",
+    "author": "nina",
+    "course": "Computer Science",
+    "year": "2",
+    "shortDesc": "Tool to help digitize historical documents.",
+    "description": "Working on software to help digitize and transcribe historical documents. Can handle the OCR and text processing, but need history students to help with understanding historical handwriting styles, common abbreviations, and context-appropriate transcription choices.",
+    "lookingFor": "#history #archival_studies #document_preservation",
+    "email": "nina@reading.ac.uk",
+    "meetingFormat": "Weekly archive visits + online meetings"
+  },
+  {
+    "title": "Sign Language Learning Game",
+    "author": "sarah",
+    "course": "Computer Science",
+    "year": "2",
+    "shortDesc": "Create an interactive game to learn sign language through webcam.",
+    "description": "Want to build a web app that uses webcam to detect if users are making correct sign language gestures. I can work on the webcam integration and basic gesture detection, but really need help from someone who knows sign language to ensure we're teaching correct forms and important phrases.",
+    "lookingFor": "#sign_language #linguistics #accessibility #education",
+    "email": "sarah@reading.ac.uk",
+    "meetingFormat": "Weekly, 2 hours, flexible timing"
+  },
+
+  {
+    "title": "Physics Lab Simulator",
+    "author": "priya",
+    "course": "Computer Science",
+    "year": "1",
+    "shortDesc": "Create interactive simulations of common physics experiments.",
+    "description": "Want to build web-based simulations of first-year physics experiments that are hard to do at home. Can handle the programming, but definitely need physics students to ensure the simulations are actually accurate and helpful for learning concepts.",
+    "lookingFor": "#physics #education #simulation #laboratory",
+    "email": "priya@reading.ac.uk",
+    "meetingFormat": "Weekly brainstorming, 3 hours"
+  },
+  {
+    "title": "Virtual Card Maker",
+    "author": "citrus",
+    "course": "Computer Science",
+    "year": "1",
+    "shortDesc": "Build customisable cards for online friends.",
+    "description": "Basically, have the whole screen as a grid of tiny boxes. User can choose their grid and then add letters/emojis/custom art/3d to each box to build a card and send online. I'm not very good with art or visuals so I'd be grateful if someone could help. Thank you",
+    "lookingFor": "#artists #webdev #website #practice #fun",
+    "email": "am@reading.ac.uk",
+    "meetingFormat": "2 times a week, 2 hrs, flexible."
+  }
+]
