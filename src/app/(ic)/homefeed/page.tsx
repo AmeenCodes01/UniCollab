@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import IdeaCard from "./component/IdeaCard";
+import IdeaCard from "../../components/IdeaCard";
 import ideas from "@/../ideas.json";
 import {Search, PlusCircle, BookOpen, Users, Code, Star} from "lucide-react";
 import projects from "@/../projects.json";
@@ -53,7 +53,7 @@ function HomeFeed() {
       </div>
 
       {/* rows messed up with header, cols does not.  */}
-      <div className="grid md:grid-cols-1   md:auto-cols-max gap-4 w-full  justify-center md:justify-normal items-center ">
+      <div className="grid md:grid-cols-1   md:auto-cols-max gap-4 w-full  justify-center md:justify-normal items-center pb-4 ">
         {projects.length !== 0
           ? projects.map((idea, i) => (
               <IdeaCard

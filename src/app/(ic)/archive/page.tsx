@@ -1,6 +1,6 @@
 import React from "react";
 import projects from "@/../projects.json";
-import IdeaCard from "../(ic)/homefeed/component/IdeaCard";
+import IdeaCard from "../../components/IdeaCard";
 function page() {
   return (
     <div className="flex w-full h-full  justify-center items-center">
@@ -14,7 +14,7 @@ function page() {
                   desc={idea.description}
                   author={idea.author}
                   course={idea.course}
-                  type={idea.type}
+                  // type={idea.type}
                   lookingFor={idea.lookingFor}
                   email={idea.email}
                 />

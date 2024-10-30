@@ -1,4 +1,4 @@
-import IdeaCard from "@/app/(ic)/homefeed/component/IdeaCard";
+import IdeaCard from "@/app/components/IdeaCard";
 import React from "react";
 import projects from "@/../projects.json";
 import {CardTitle} from "@/components/ui/card";

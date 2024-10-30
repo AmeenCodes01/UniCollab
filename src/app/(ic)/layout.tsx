@@ -6,8 +6,8 @@ export default async function ICLayout({
 }) {
   return (
     <div className=" w-full h-full flex flex-col">
-      {/* <Header /> */}
-      <div className="p-2 h-[100%] flex">{children}</div>
+      <Header />
+      <div className="p-2 h-[100%] flex-1 w-full">{children}</div>
     </div>
   );
 }
