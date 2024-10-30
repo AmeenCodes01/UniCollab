@@ -5,9 +5,9 @@ export default async function ICLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className=" w-full h-full flex flex-col">
+    <div className="flex-1 flex flex-col">
       <Header />
-      <div className="p-2 h-[100%] flex-1 w-full">{children}</div>
+      <div className="px-4 py-2 flex-1 overflow-auto">{children}</div>
     </div>
   );
 }

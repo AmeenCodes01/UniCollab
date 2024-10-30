@@ -9,15 +9,17 @@ function HomeFeed() {
   const data = ideas || [];
   let filter = "all";
 
-  const emailInterest = () => {
+  const emailInterest = (title: string) => {
     const email = "student@example.com";
-    const subject = encodeURIComponent("Interested in joining project");
+    const subject = encodeURIComponent(
+      `Interested in joining project ${title}`
+    );
 
     window.location.href = `mailto:${email}?subject=${subject}`;
   };
 
   return (
-    <div className=" w-full h-[100%] flex flex-col max-w-7xl mx-auto ">
+    <div className=" w-full h-[100%] flex flex-col max-w-7xl mx-auto  ">
       <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 mb-6">
         <h2 className="font-medium text-lg">👋 Welcome to UniCollab!</h2>
         <p className="text-gray-600 mt-1">
@@ -53,7 +55,7 @@ function HomeFeed() {
       </div>
 
       {/* rows messed up with header, cols does not.  */}
-      <div className="grid md:grid-cols-1   md:auto-cols-max gap-4 w-full  justify-center md:justify-normal items-center pb-4 ">
+      <div className="grid md:grid-cols-1   md:auto-cols-max gap-4 w-full  justify-center md:justify-normal items-center pb-4  ">
         {projects.length !== 0
           ? projects.map((idea, i) => (
               <IdeaCard
@@ -69,7 +71,9 @@ function HomeFeed() {
                 meetingFormat={idea.meetingFormat}
                 btn={
                   <>
-                    <Button onClick={emailInterest} variant={"default"}>
+                    <Button
+                      onClick={() => emailInterest(idea.title)}
+                      variant={"default"}>
                       I'm Interested
                     </Button>
                     <Button variant={"outline"}>Save for later</Button>

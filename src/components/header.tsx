@@ -4,8 +4,8 @@ import Link from "next/link";
 import {Archive} from "lucide-react";
 function Header() {
   return (
-    <header className=" md:p-4 p-2 border-b sticky top-0 z-[20] bg-black self-start w-full ">
-      <div className="flex flex-row gap-4 ">
+    <header className="  border-b sticky h-16 top-0 z-[20] self-start w-full ">
+      <div className="flex flex-row gap-4  bg-black h-full md:p-4 p-2 items-center">
         <Link href="/homefeed">
           <h1 className="text-white self-center text-2xl font-bold">
             UniCollab
@@ -13,18 +13,21 @@ function Header() {
         </Link>
         <Link
           href="/archive"
-          className=" ml-auto justify-center flex   self-center">
+          className=" ml-auto justify-center flex  my-auto self-center">
           <Archive color="white" className="self-center" size={24} />
         </Link>
-        <Link href="/shareidea" className="self-end   ">
+        <Link href="/shareidea" className="self-center  justify-center  ">
           <Button
             variant={"outline"}
-            className="ml-auto flex font-cinzel  "
+            className="ml-auto flex font-cinzel self-center  "
             size="sm">
             Share Idea
           </Button>
         </Link>
       </div>
+      <span className="italic pl-2 text-gray-700  text-sm bg-gray-100">
+        *example data taken from ChatGPT and Claude
+      </span>
     </header>
   );
 }

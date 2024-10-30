@@ -37,7 +37,6 @@ function IdeaCard({
   btn,
 }: Props) {
   //a profile page for name + year.
-  const lookingFortxt = lookingFor?.split("#");
 
   return (
     <div className="flex h-[100%] flex-col ">
@@ -63,7 +62,7 @@ function IdeaCard({
                 </p>
                 <div className="flex md:flex-row-reverse flex-col gap-4 md:gap-0 justify-between w-full   ">
                   <div className="flex flex-col">
-                    <span className="text-[12px] text-gray-700  font-semibold ">
+                    <span className="text-xs text-gray-800 font-[400] pb-[4px]  ">
                       Seeking teammates eager to contribute or learn in:
                       <br />
                     </span>
@@ -73,7 +72,7 @@ function IdeaCard({
                   </div>
 
                   <div className="flex flex-col">
-                    <span className="text-xs text-gray-700  font-semibold ">
+                    <span className="text-xs text-gray-800 font-[500] pb-[4px]  ">
                       {" "}
                       Collab:
                     </span>
@@ -94,6 +93,12 @@ function IdeaCard({
               </span>
             </div>
           </CardFooter>
+          {btn && (
+            <span className="text-gray-400 text-xs italic self-start pl-6 pb-2 ">
+              On clicking interest, your email app will open with project title
+              and author's email.
+            </span>
+          )}
         </Card>
         <IdeaDialogue
           title={title}
