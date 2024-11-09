@@ -27,7 +27,10 @@ function ShareIdea() {
         </div> */}
         <div className="grid w-full max-w-sm items-center gap-1">
           <Label className="text-xs ">Would love collaborating with:</Label>
-          <Input type="text" placeholder="artist / web dev / 3d" />
+          <Input
+            type="text"
+            placeholder="artist / web dev / 3d / psychology etc"
+          />
         </div>
         <div className="grid w-full max-w-sm items-center gap-1">
           <Label className="text-xs ">Meeting format</Label>
