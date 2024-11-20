@@ -14,6 +14,8 @@ type Props = {
 import IdeaDialogue from "@/app/components/IdeaDialogue";
 import {Badge} from "@/components/ui/badge";
 import {Button} from "@/components/ui/button";
+// import { Doc } from "../convex/_generated/dataModel";
+
 import {
   Card,
   CardContent,

@@ -2,6 +2,8 @@ import React from "react";
 import {Button} from "./ui/button";
 import Link from "next/link";
 import {Archive} from "lucide-react";
+import {SignInButton, UserButton} from "@clerk/nextjs";
+import {Authenticated, Unauthenticated} from "convex/react";
 function Header() {
   return (
     <header className="  border-b sticky h-16 top-0 z-[20] self-start w-full ">
@@ -11,11 +13,19 @@ function Header() {
             UniCollab
           </h1>
         </Link>
+        {/* <Unauthenticated> */}
+        {/* <SignInButton forceRedirectUrl="/homefeed">
+          <Button>Login</Button>
+        </SignInButton> */}
+        {/* </Unauthenticated> */}
+        {/* <Authenticated> */}
         <Link
           href="/archive"
           className=" ml-auto justify-center flex  my-auto self-center">
           <Archive color="white" className="self-center" size={24} />
         </Link>
+
+        <UserButton />
         <Link href="/shareidea" className="self-center  justify-center  ">
           <Button
             variant={"outline"}
@@ -24,10 +34,11 @@ function Header() {
             Share Idea
           </Button>
         </Link>
+        {/* </Authenticated> */}
       </div>
-      <span className="italic pl-2 text-gray-700  text-sm bg-gray-100">
+      {/* <span className="italic pl-2 text-gray-700  text-sm bg-gray-100">
         *example data taken from ChatGPT and Claude
-      </span>
+      </span> */}
     </header>
   );
 }

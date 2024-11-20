@@ -1,34 +1,19 @@
-import type {Metadata} from "next";
-import localFont from "next/font/local";
+import Providers from "@/components/Providers";
+import AuthScreen from "./auth/component/AuthScreen";
 import "./globals.css";
+import Header from "@/components/header";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
-
-export const metadata: Metadata = {
-  title: "UniCollab",
-  description:
-    "UniCollab: A platform for university students to pitch ideas, network, and collaborate on cross-disciplinary projects.",
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen flex flex-col`}>
-        {children}
+      <body className="antialiased h-screen flex flex-col ">
+        {/* Wrap the application in Providers for authentication management */}
+        <Providers>
+          <div className="flex-1 flex flex-col">
+            <Header />
+            <div className="px-4 py-2 flex-1 overflow-auto">{children}</div>
+          </div>
+        </Providers>
       </body>
     </html>
   );

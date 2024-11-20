@@ -1,23 +1,15 @@
-"use client";
 import React from "react";
 import IdeaCard from "../../components/IdeaCard";
-import ideas from "@/../ideas.json";
-import {Search, PlusCircle, BookOpen, Users, Code, Star} from "lucide-react";
-import projects from "@/../projects.json";
-import {Button} from "@/components/ui/button";
-function HomeFeed() {
-  const data = ideas || [];
+import {Search, Code} from "lucide-react";
+import InterestBtn from "@/app/components/InterestBtn";
+import {fetchQuery} from "convex/nextjs";
+import {api} from "../../../../convex/_generated/api";
+import {getAuthToken} from "@/auth";
+
+async function HomeFeed() {
+  const token = await getAuthToken();
+  const ideas = await fetchQuery(api.ideas.getAllIdeas, {}, {token});
   let filter = "all";
-
-  const emailInterest = (title: string) => {
-    const email = "student@example.com";
-    const subject = encodeURIComponent(
-      `Interested in joining project ${title}`
-    );
-
-    window.location.href = `mailto:${email}?subject=${subject}`;
-  };
-
   return (
     <div className=" w-full h-[100%] flex flex-col max-w-7xl mx-auto  ">
       <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 mb-6">
@@ -56,29 +48,20 @@ function HomeFeed() {
 
       {/* rows messed up with header, cols does not.  */}
       <div className="grid md:grid-cols-1   md:auto-cols-max gap-4 w-full  justify-center md:justify-normal items-center pb-4  ">
-        {projects.length !== 0
-          ? projects.map((idea, i) => (
+        {ideas.length !== 0
+          ? ideas.map((idea, i) => (
               <IdeaCard
                 key={i}
                 title={idea.title}
                 shortDesc={idea.shortDesc}
                 desc={idea.description}
                 // tags={idea.tags}
-                author={idea.author}
-                course={idea.course}
+                author={idea?.user[0]?.firstName}
+                course={idea?.user[0]?.course}
                 lookingFor={idea.lookingFor}
-                email={idea.email}
+                email={idea?.user[0]?.email}
                 meetingFormat={idea.meetingFormat}
-                btn={
-                  <>
-                    <Button
-                      onClick={() => emailInterest(idea.title)}
-                      variant={"default"}>
-                      I'm Interested
-                    </Button>
-                    <Button variant={"outline"}>Save for later</Button>
-                  </>
-                }
+                btn={<InterestBtn title={idea.title} ideaId={idea._id} />}
               />
             ))
           : null}
