@@ -29,13 +29,18 @@ export default defineSchema({
     .index("authorId", ["authorId"])
     .index("by_title", ["title"]),
 
+  // get all saved ideas for a certain user  ideaid_userId_type
+  // get all interested ideas for a certain user  ideaId_userId_type
+  // above 2 willl be filtered on client server comp, so no need for type.
+  // get all interested users for a idea  ideaId_type
+
   interested: defineTable({
     userId: v.id("users"),
     ideaId: v.id("ideas"),
+    type: v.union(v.literal("interested"), v.literal("saved")),
   })
-    .index("by_ideaId_userId", ["ideaId", "userId"])
-    .index("by_ideaId", ["ideaId"])
-    .index("by_userId", ["userId"]),
+    .index("by_ideaId_type", ["ideaId", "type"])
+    .index("by_userId_ideaId", ["userId", "ideaId"]),
 
   teams: defineTable({
     userId: v.id("users"),
@@ -43,11 +48,4 @@ export default defineSchema({
   })
     .index("by_userId", ["userId"])
     .index("by_ideaId", ["ideaId"]),
-
-  saved: defineTable({
-    ideaId: v.id("ideas"),
-    userId: v.id("users"),
-  })
-    .index("by_userId", ["userId"])
-    .index("by_ideaId_userId", ["ideaId", "userId"]),
 });

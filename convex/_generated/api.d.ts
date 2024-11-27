@@ -16,7 +16,6 @@ import type {
 import type * as http from "../http.js";
 import type * as ideas from "../ideas.js";
 import type * as interested from "../interested.js";
-import type * as saved from "../saved.js";
 import type * as teams from "../teams.js";
 import type * as users from "../users.js";
 
@@ -32,7 +31,6 @@ declare const fullApi: ApiFromModules<{
   http: typeof http;
   ideas: typeof ideas;
   interested: typeof interested;
-  saved: typeof saved;
   teams: typeof teams;
   users: typeof users;
 }>;

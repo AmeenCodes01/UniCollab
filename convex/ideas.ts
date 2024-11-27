@@ -2,30 +2,70 @@ import {v} from "convex/values";
 import {query, mutation} from "./_generated/server";
 import {getCurrentUserOrThrow} from "./users";
 import {getAll} from "convex-helpers/server/relationships";
+import {api} from "./_generated/api";
 
 // GET USER IDEAS
 export const get = query({
-  args: {
-    //  token: v.any(),
-    //status: v.string(), id: v.id("users")
-  },
-  handler: async (
-    ctx,
-    {
-      //  status
-    }
-  ) => {
+  args: {},
+  handler: async (ctx) => {
     const user = await getCurrentUserOrThrow(ctx);
-    // const {tokenIdentifier, name, email} = identity!;
-    ///   console.log(tokenIdentifier, "tk");
 
-    return await ctx.db
+    // Fetch pitched ideas (user is the author)
+    const authoredIdeas = await ctx.db
       .query("ideas")
       .filter((i) => i.eq(i.field("authorId"), user._id))
       .collect();
-    // .filter(
-    //   (q) => q.eq(q.field("ownerId"), id) && q.eq(q.field("status"), status)
-    // );
+    const authored = authoredIdeas.map((idea) => ({
+      ...idea,
+      type: "author",
+    }));
+
+    // Fetch ideas where the user is a team member
+    const userTeams = await ctx.db
+      .query("teams")
+      .withIndex("by_userId", (q) => q.eq("userId", user._id))
+      .collect();
+
+    const teamIdeaIds = userTeams.map((u) => u.ideaId);
+
+    const teamIdeas = await getAll(ctx.db, teamIdeaIds);
+    const member = teamIdeas
+      .filter(Boolean)
+      .map((idea) =>
+        idea!.status !== "closed"
+          ? {
+              ...idea,
+              type: "member",
+            }
+          : null
+      )
+      .filter(Boolean);
+
+    // Fetch user's interested/saved ideas
+    const userInterest = await ctx.db
+      .query("interested")
+      .withIndex("by_userId_ideaId", (q) => q.eq("userId", user._id))
+      .collect();
+    const interestIdeaIds = userInterest.map((u) => u.ideaId);
+
+    const interestedIdeas = await getAll(ctx.db, interestIdeaIds);
+
+    const interested = userInterest
+      .map(({ideaId, type}) => {
+        const idea = interestedIdeas.find((i) => i?._id === ideaId);
+        if (!idea) return null;
+        return {
+          ...idea,
+          type,
+        };
+      })
+      .filter(Boolean);
+
+    // Combine all ideas into a single list
+    const allIdeas = [...authored, ...member, ...interested];
+
+    // Return the combined list
+    return allIdeas;
   },
 });
 

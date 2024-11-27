@@ -5,6 +5,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogDescription,
+  DialogClose,
 } from "@/components/ui/dialog";
 import {Button} from "@/components/ui/button";
 type Props = {
@@ -37,7 +38,9 @@ function IdeaDialogue({title, shortDesc, desc, btn}: Props) {
                 ))
               : null}
           </div> */}
-      <DialogFooter className="flex flex-col">{btn && btn} </DialogFooter>
+      <DialogFooter className="flex flex-col">
+        <DialogClose asChild>{btn && btn}</DialogClose>
+      </DialogFooter>
     </DialogContent>
   );
 }
