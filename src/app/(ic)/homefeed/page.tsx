@@ -5,11 +5,18 @@ import InterestBtn from "@/app/components/InterestBtn";
 import {fetchQuery} from "convex/nextjs";
 import {api} from "../../../../convex/_generated/api";
 import {getAuthToken} from "@/auth";
+import {Id} from "../../../../convex/_generated/dataModel";
 
 async function HomeFeed() {
   const token = await getAuthToken();
-  const ideas = await fetchQuery(api.ideas.getAllIdeas, {}, {token});
+  const ideas = await fetchQuery(
+    api.ideas.getAllIdeas,
+    {status: "open"},
+    {token}
+  );
+  const user = await fetchQuery(api.users.current);
   let filter = "all";
+  //what about the ideas user is already a team member of.
   return (
     <div className=" w-full h-[100%] flex flex-col max-w-7xl mx-auto  ">
       <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 mb-6">
@@ -56,12 +63,18 @@ async function HomeFeed() {
                 shortDesc={idea.shortDesc}
                 desc={idea.description}
                 // tags={idea.tags}
+                lookingFor={idea.lookingFor}
                 author={idea?.user[0]?.firstName}
                 course={idea?.user[0]?.course}
-                lookingFor={idea.lookingFor}
                 email={idea?.user[0]?.email}
                 meetingFormat={idea.meetingFormat}
-                btn={<InterestBtn title={idea.title} ideaId={idea._id} />}
+                btn={
+                  <InterestBtn
+                    title={idea.title}
+                    ideaId={idea._id}
+                    authId={idea.authorId as Id<"users">}
+                  />
+                }
               />
             ))
           : null}

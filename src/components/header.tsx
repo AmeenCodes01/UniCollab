@@ -4,6 +4,7 @@ import Link from "next/link";
 import {Archive} from "lucide-react";
 import {SignInButton, UserButton} from "@clerk/nextjs";
 import {Authenticated, Unauthenticated} from "convex/react";
+import {ModeToggle} from "./ui/modeToggle";
 function Header() {
   return (
     <header className="  border-b sticky h-16 top-0 z-[20] self-start w-full ">
@@ -25,15 +26,24 @@ function Header() {
           <Archive color="white" className="self-center" size={24} />
         </Link>
 
-        <UserButton />
+        <Link href="/manage" className="self-center  justify-center  ">
+          <Button
+            variant={"outline"}
+            className="ml-auto flex font-cinzel self-center  "
+            size="sm">
+            Manage Projects
+          </Button>
+        </Link>
         <Link href="/shareidea" className="self-center  justify-center  ">
           <Button
             variant={"outline"}
             className="ml-auto flex font-cinzel self-center  "
             size="sm">
-            Share Idea
+            Share
           </Button>
         </Link>
+        <UserButton />
+        <ModeToggle />
         {/* </Authenticated> */}
       </div>
       {/* <span className="italic pl-2 text-gray-700  text-sm bg-gray-100">

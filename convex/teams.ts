@@ -33,3 +33,17 @@ export const accept = mutation({
     await ctx.db.delete(interestedId);
   },
 });
+export const del = mutation({
+  args: {ideaId: v.id("ideas"), userId: v.id("users")},
+  handler: async (ctx, {ideaId, userId}) => {
+    const teamUser = await ctx.db
+      .query("teams")
+      .withIndex("by_ideaId_userId", (t) =>
+        t.eq("ideaId", ideaId).eq("userId", userId)
+      )
+      .unique();
+    if (teamUser) {
+      await ctx.db.delete(teamUser._id);
+    }
+  },
+});

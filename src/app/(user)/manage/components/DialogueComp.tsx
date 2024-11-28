@@ -5,7 +5,6 @@ import IdeaDialogue from "@/app/components/IdeaDialogue";
 import InterestBtn from "@/app/components/InterestBtn";
 import DelBtn from "./DelButton";
 import {IdeaWithType} from "../../../../../env";
-import {DialogClose} from "@radix-ui/react-dialog";
 
 type Props = {idea: IdeaWithType};
 
@@ -20,7 +19,7 @@ function DialogueComp({idea}: Props) {
         desc={idea.description}
         btn={
           idea.type == "interested" ? (
-            <DelBtn ideaId={idea._id} />
+            <DelBtn ideaId={idea._id} title={idea.title} />
           ) : (
             <InterestBtn ideaId={idea._id} title={idea.title} mode="del" />
           )

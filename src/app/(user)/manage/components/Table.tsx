@@ -30,7 +30,7 @@ export function DataTable<TData, TValue>({
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
-  console.log(data, "data table");
+  console.log(data[0], "data table");
   return (
     <div className="rounded-md  w-full border">
       <Table>
@@ -68,7 +68,7 @@ export function DataTable<TData, TValue>({
           ) : (
             <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-start  ">
-                No ideas with status open
+                No ideas
               </TableCell>
             </TableRow>
           )}

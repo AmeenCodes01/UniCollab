@@ -25,6 +25,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {Dialog, DialogTrigger} from "@/components/ui/dialog";
+import {Id} from "../../../convex/_generated/dataModel";
 function IdeaCard({
   title,
   shortDesc,
@@ -50,7 +51,7 @@ function IdeaCard({
                 <CardTitle className="font-cinzel text-md font-semibold ">
                   {title}
                 </CardTitle>
-                <CardDescription className="text-xs text-gray-400">
+                <CardDescription className="text-xs ">
                   <span>
                     {author} • {course}
                   </span>
@@ -64,21 +65,21 @@ function IdeaCard({
                 </p>
                 <div className="flex md:flex-row-reverse flex-col gap-4 md:gap-0 justify-between w-full   ">
                   <div className="flex flex-col">
-                    <span className="text-xs text-gray-800 font-[400] pb-[4px]  ">
+                    <span className="text-xs  font-[400] pb-[4px]  ">
                       Seeking teammates eager to contribute or learn in:
                       <br />
                     </span>
-                    <span className="text-xs font-extralight text-gray-600 italic">
+                    <span className="text-sm font-extralight italic">
                       {lookingFor}
                     </span>
                   </div>
 
                   <div className="flex flex-col">
-                    <span className="text-xs text-gray-800 font-[500] pb-[4px]  ">
+                    <span className="text-xs font-[500] pb-[4px]  ">
                       {" "}
                       Collab:
                     </span>
-                    <span className="text-xs font-extralight text-gray-600 italic md:self-end mt-auto">
+                    <span className="text-sm font-extralight italic md:self-end mt-auto">
                       {" "}
                       {meetingFormat}
                     </span>
@@ -90,13 +91,13 @@ function IdeaCard({
           <CardFooter className="flex md:flex-row flex-col gap-2  justify-between">
             <div className="flex gap-2">{btn && btn}</div>
             <div className="mt-auto ">
-              <span className="text-gray-400 text-xs italic self-end mt-auto">
+              <span className=" text-xs italic self-end mt-auto">
                 Click for more details
               </span>
             </div>
           </CardFooter>
           {btn && (
-            <span className="text-gray-400 text-xs italic self-start pl-6 pb-2 ">
+            <span className=" text-xs italic self-start pl-6 pb-2 ">
               On clicking interest, your email app will open with project title
               and author's email.
             </span>

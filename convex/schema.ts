@@ -47,5 +47,6 @@ export default defineSchema({
     ideaId: v.id("ideas"),
   })
     .index("by_userId", ["userId"])
+    .index("by_ideaId_userId", ["ideaId", "userId"])
     .index("by_ideaId", ["ideaId"]),
 });

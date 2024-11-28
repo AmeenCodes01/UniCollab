@@ -86,8 +86,23 @@ export const accept = mutation({
     //if existingInterest exist with type"interested" & arg type is "Interested", send back message
     //if doesn't exist,
 
+    // what if you're already a team member ? need to check in team as well.
+
+    const existingMember = await ctx.db
+      .query("teams")
+      .withIndex("by_ideaId_userId", (t) =>
+        t.eq("ideaId", ideaId).eq("userId", user._id)
+      )
+      .unique();
+
     if (existingInterest?.type == "interested" && type == "interested") {
       return {status: "error", message: "You've already expressed interest"};
+    }
+    if (existingMember) {
+      return {
+        status: "error",
+        message: "You're already a member of this project",
+      };
     }
     if (existingInterest?.type == "saved" && type == "interested") {
       return await ctx.db.patch(existingInterest._id, {type});

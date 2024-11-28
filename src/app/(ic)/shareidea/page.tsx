@@ -10,7 +10,7 @@ import {z} from "zod";
 import Link from "next/link";
 import {api} from "../../../../convex/_generated/api";
 import {revalidatePath} from "next/cache";
-import {FormEvent} from "react";
+import {FormEvent, useEffect} from "react";
 import {useForm} from "react-hook-form";
 import {
   Form,
@@ -21,8 +21,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {useMutation} from "convex/react";
-import {useRouter} from "next/navigation";
+import {useMutation, useQuery} from "convex/react";
+import {useRouter, useSearchParams} from "next/navigation";
+import {Id} from "../../../../convex/_generated/dataModel";
 
 const formSchema = z.object({
   title: z.string().min(1, "Cannot be left blank"),
@@ -35,7 +36,16 @@ const formSchema = z.object({
 
 function ShareIdea() {
   const createIdea = useMutation(api.ideas.create);
+  const saveIdea = useMutation(api.ideas.editIdea);
   const router = useRouter();
+
+  //for edit
+  const editId = useSearchParams();
+  const editIdea = useQuery(api.ideas.getIdea, {
+    ideaId: editId.get("id")?.toString() as Id<"ideas">,
+  });
+  console.log(editIdea, "edit");
+  console.log(editId ? true : false, "editide");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -50,17 +60,38 @@ function ShareIdea() {
   });
   const {
     formState: {errors, isSubmitting},
+    reset,
   } = form;
   console.log(isSubmitting, "isSubmittin");
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    const newVal = {...values, limit: parseInt(values.limit)};
-    createIdea(newVal);
+    const newVal = editId
+      ? {
+          ...values,
+          limit: parseInt(values.limit),
+          id: editId.get("id")?.toString() as Id<"ideas">,
+        }
+      : {...values, limit: parseInt(values.limit)};
+    editId
+      ? saveIdea(newVal as typeof newVal & {id: Id<"ideas">})
+      : createIdea(newVal);
     console.log(values, " V A L U E S FROM ZOD");
     router.push("/homefeed");
   }
 
+  useEffect(() => {
+    if (editId && editIdea) {
+      reset({
+        title: editIdea.title || "",
+        shortDesc: editIdea.shortDesc || "",
+        description: editIdea.description || "",
+        lookingFor: editIdea.lookingFor || "",
+        meetingFormat: editIdea.meetingFormat || "",
+        limit: editIdea.limit?.toString() || "",
+      });
+    }
+  }, [editId, editIdea, reset]);
   return (
     <Form {...form}>
       {/* <div className="justify-center items-center flex  flex-col w-full  h-full  "> */}
@@ -175,7 +206,13 @@ function ShareIdea() {
         />
 
         <Button className="w-full " type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Sharing idea..." : " Share Idea"}{" "}
+          {isSubmitting
+            ? editId
+              ? "Saving Idea..."
+              : "Sharing idea..."
+            : editId
+              ? "Save Idea"
+              : " Share Idea"}
         </Button>
         {/* </Link> */}
       </form>

@@ -21,7 +21,7 @@ function IdeaDialogue({title, shortDesc, desc, btn}: Props) {
       <DialogHeader>
         <DialogTitle>{title}</DialogTitle>
       </DialogHeader>
-      <DialogDescription className="font-light leading-7 text-black">
+      <DialogDescription className="font-light leading-7">
         {desc}
       </DialogDescription>
 
