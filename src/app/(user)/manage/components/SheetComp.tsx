@@ -11,9 +11,10 @@ import {MoreHorizontal} from "lucide-react";
 import {Button} from "@/components/ui/button";
 import {Doc, Id} from "../../../../../convex/_generated/dataModel";
 
-import {useMutation, useQuery} from "convex/react";
+import {useAction, useMutation, useQuery} from "convex/react";
 import {api} from "../../../../../convex/_generated/api";
 import Link from "next/link";
+import {navigate} from "@/actions/manageRefresh";
 
 function SheetComp({idea}: {idea: Doc<"ideas">}) {
   const interested =
@@ -24,7 +25,8 @@ function SheetComp({idea}: {idea: Doc<"ideas">}) {
   const team = useQuery(api.teams.get, {ideaId: idea._id});
   const accept = useMutation(api.teams.accept);
   const reject = useMutation(api.interested.reject);
-  const remove = useMutation(api.teams.del);
+  const remove = useMutation(api.teams.delUser);
+  const delIdea = useAction(api.ideas.delIdeasAndRelated);
   const acceptUser = (id: Id<"interested">) =>
     accept({ideaId: idea._id, interestedId: id});
 
@@ -40,7 +42,11 @@ function SheetComp({idea}: {idea: Doc<"ideas">}) {
 
     return params.toString();
   };
-
+  const onDelIdea = () => {
+    delIdea({id: idea._id});
+    navigate();
+  };
+  
   return (
     <Sheet>
       <SheetTrigger>
@@ -123,7 +129,10 @@ function SheetComp({idea}: {idea: Doc<"ideas">}) {
           <Link href={"/shareidea?" + createQueryString("id", idea._id)}>
             <Button className="w-full">Edit</Button>
           </Link>
-          <Button className="w-full" variant={"destructive"}>
+          <Button
+            className="w-full"
+            variant={"destructive"}
+            onClick={onDelIdea}>
             Delete{" "}
           </Button>
         </div>

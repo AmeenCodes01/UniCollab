@@ -1,12 +1,16 @@
-"use client";
-import AuthScreen from "./auth/component/AuthScreen";
-import {Authenticated, Unauthenticated} from "convex/react";
+import {fetchQuery} from "convex/nextjs";
+import {api} from "../../convex/_generated/api";
+import {getAuthToken} from "@/auth";
+import {redirect} from "next/navigation";
 
-export default function Home() {
-  return (
-    <div className=" w-full h-full  flex flex-col max-w-7xl mx-auto justify-center items-center gap-4 bg-blue-500 ">
-      {/* <h1 className="text-6xl font-bold">UniCollab</h1>
-      <AuthScreen /> */}
-    </div>
-  );
+export default async function Home() {
+  //from signin/login I can directed here & then from here, if year exist, take to homefeed. else, direct to homefeed
+  const token = await getAuthToken();
+  const user = await fetchQuery(api.users.current, {}, {token});
+
+  if (user?.year && user?.course) {
+    redirect("/homefeed");
+  } else {
+    redirect("/profile");
+  }
 }

@@ -141,6 +141,13 @@ export const reject = mutation({
     }
   },
 });
+
+export const del = mutation({
+  args: {id: v.id("interested")},
+  handler: async ({db}, {id}) => {
+    await db.delete(id);
+  },
+});
 // export const delete = mutation({
 //   args: {interestedId: v.id("interested")},
 //   handler: async (ctx, {interestedId}) => {

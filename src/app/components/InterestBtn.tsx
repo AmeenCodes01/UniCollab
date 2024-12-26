@@ -22,7 +22,6 @@ const InterestBtn = ({
   const express = useMutation(api.interested.accept);
   const del = useMutation(api.interested.reject);
   const user = useQuery(api.ideas.userByIdea, {ideaId});
-  console.log("u s e r", user);
   const onPress = (type: "interested" | "saved" | "del") => {
     type !== "del"
       ? express({ideaId, type})
@@ -37,11 +36,8 @@ const InterestBtn = ({
                 : null;
           })
       : del({ideaId, type: "saved"});
-    console.log("down here, before navigate", type);
     type == "del" || mode == "del" ? navigate() : null;
-    console.log("down here, after navigate", type);
   };
-  console.log(user?._id === authId, "useridchecking", user?._id, ideaId);
   //NEED TO SEND TYPE
   return (
     <>

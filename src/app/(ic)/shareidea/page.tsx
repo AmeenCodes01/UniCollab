@@ -40,13 +40,14 @@ function ShareIdea() {
   const router = useRouter();
 
   //for edit
-  const editId = useSearchParams();
-  const editIdea = useQuery(api.ideas.getIdea, {
-    ideaId: editId.get("id")?.toString() as Id<"ideas">,
-  });
-  console.log(editIdea, "edit");
-  console.log(editId ? true : false, "editide");
-
+  const param = useSearchParams();
+  const editId = param.get("id")?.toString();
+  const editIdea = editId
+    ? useQuery(api.ideas.getIdea, {
+        ideaId: editId as Id<"ideas">,
+      })
+    : null;
+  console.log(editId ? true : false, "edit");
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -62,7 +63,7 @@ function ShareIdea() {
     formState: {errors, isSubmitting},
     reset,
   } = form;
-  console.log(isSubmitting, "isSubmittin");
+
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
@@ -70,13 +71,12 @@ function ShareIdea() {
       ? {
           ...values,
           limit: parseInt(values.limit),
-          id: editId.get("id")?.toString() as Id<"ideas">,
+          id: editId as Id<"ideas">,
         }
       : {...values, limit: parseInt(values.limit)};
     editId
       ? saveIdea(newVal as typeof newVal & {id: Id<"ideas">})
       : createIdea(newVal);
-    console.log(values, " V A L U E S FROM ZOD");
     router.push("/homefeed");
   }
 

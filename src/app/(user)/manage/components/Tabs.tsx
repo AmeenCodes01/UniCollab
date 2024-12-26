@@ -5,13 +5,13 @@ import {Doc} from "../../../../../convex/_generated/dataModel";
 import {fetchQuery} from "convex/nextjs";
 import {api} from "../../../../../convex/_generated/api";
 import {getAuthToken} from "@/auth";
+import { pendRejcols } from "./status/PendRejInfo";
 
 const ProjectManage = async ({
   data,
 }: {
   data: (Doc<"ideas"> & {type: "interested" | "saved" | "member" | "author"})[];
 }) => {
-  const token = await getAuthToken();
 
   const open = data.filter(
     (idea) => idea.type == "author" && idea.status == "open"
@@ -21,16 +21,11 @@ const ProjectManage = async ({
       idea.status == "closed" &&
       (idea.type == "member" || idea.type == "author")
   );
-  // const interestSave = (await fetchQuery(
-  //   api.interested.user,
-  //   {},
-  //   {token}
-  // )) as (Doc<"ideas"> & {type: "saved" | "interested"})[];
+
   const interested = data.filter((idea) => idea.type === "interested");
   const saved = data.filter((idea) => idea.type === "saved");
-  console.log(saved, "save");
-  console.log(open, "open");
-
+  const pendRej = data.filter(idea=> idea.status=="pending" || idea.status=="rejected")
+  console.log(pendRej,"pendRej")
   return (
     <Tabs defaultValue="pitched" className=" w-[70%]  ">
       <TabsList className="w-full ">
@@ -40,6 +35,10 @@ const ProjectManage = async ({
 
         <TabsTrigger value="saved/interested" className="w-full">
           Saved/Interested
+        </TabsTrigger>
+
+        <TabsTrigger value="pendRej" className="w-full">
+          Awaiting/Rejected
         </TabsTrigger>
       </TabsList>
       <TabsContent value="pitched" className="w-full">
@@ -81,8 +80,11 @@ const ProjectManage = async ({
           </TabsContent>
         </Tabs>
       </TabsContent>
+      <TabsContent value="pendRej">
+
+      <DataTable columns={pendRejcols} data={pendRej} />
+      </TabsContent>
       {/* <TabsContent value="completed">
-        <DataTable columns={columns} data={completed} />
       </TabsContent> */}
     </Tabs>
   );

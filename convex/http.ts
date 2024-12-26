@@ -14,6 +14,7 @@ http.route({
     if (!event) {
       return new Response("Error occured", {status: 400});
     }
+    console.log(event, " E V E N T");
     switch (event.type) {
       case "user.created": // intentional fallthrough
       case "user.updated":

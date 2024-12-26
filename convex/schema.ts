@@ -1,5 +1,6 @@
 import {defineSchema, defineTable} from "convex/server";
 import {v} from "convex/values";
+
 export default defineSchema({
   users: defineTable({
     email: v.string(),
@@ -9,6 +10,7 @@ export default defineSchema({
     year: v.optional(v.number()),
     course: v.optional(v.string()),
     imageUrl: v.optional(v.string()),
+    councilMember : v.optional( v.boolean())
   }).index("byClerkUserId", ["clerkUserId"]),
 
   ideas: defineTable({
@@ -22,12 +24,18 @@ export default defineSchema({
     status: v.union(
       v.literal("open"),
       v.literal("closed"),
-      v.literal("completed")
+      v.literal("completed"),
+      v.literal("pending"),
+      v.literal("rejected")
     ),
     endedAt: v.optional(v.number()),
+    rejectedReason: v.optional(v.string()),
+    councilMemberId: v.optional(v.id("users"))
   })
     .index("authorId", ["authorId"])
-    .index("by_title", ["title"]),
+    .index("by_title", ["title"])
+    .index("by_status",["status"])
+    ,
 
   // get all saved ideas for a certain user  ideaid_userId_type
   // get all interested ideas for a certain user  ideaId_userId_type
@@ -45,8 +53,9 @@ export default defineSchema({
   teams: defineTable({
     userId: v.id("users"),
     ideaId: v.id("ideas"),
+    owner: v.boolean(),
   })
     .index("by_userId", ["userId"])
-    .index("by_ideaId_userId", ["ideaId", "userId"])
-    .index("by_ideaId", ["ideaId"]),
+    .index("by_ideaId", ["ideaId"])
+    .index("by_ideaId_userId", ["ideaId", "userId"]),
 });

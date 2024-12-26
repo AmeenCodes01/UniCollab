@@ -1,16 +1,12 @@
 "use client";
-import {ColumnDef} from "@tanstack/react-table";
+import { ColumnDef } from "@tanstack/react-table";
 
-import {Button} from "@/components/ui/button";
-import {Doc, Id} from "../../../../../convex/_generated/dataModel";
+import { Doc  } from "../../../../../convex/_generated/dataModel";
 
-import {useMutation, useQuery} from "convex/react";
-import {api} from "../../../../../convex/_generated/api";
 import SheetComp from "./SheetComp";
-import IdeaDialogue from "@/app/components/IdeaDialogue";
 import DialogueComp from "./DialogueComp";
 export const columns: ColumnDef<
-  Doc<"ideas"> & {type: "interested" | "saved" | "member" | "author"}
+  Doc<"ideas"> & { type: "interested" | "saved" | "member" | "author" }
 >[] = [
   {
     accessorKey: "title",
@@ -19,26 +15,41 @@ export const columns: ColumnDef<
   {
     accessorKey: "_creationTime",
     header: "Start",
-    cell: ({row}) => {
-      const date = new Date(Math.floor(row.getValue("_creationTime")));
-      const dateOnly = date.toISOString().split("T")[0];
-      return <span>{dateOnly}</span>;
+    cell: ({ row }) => {
+      const idea = row.original;
+      if (
+        row.getValue("_creationTime") &&
+        idea.status !== "pending" &&
+        idea.status !== "rejected"
+      ) {
+        const date = new Date(Math.floor(row.getValue("_creationTime")));
+        const dateOnly = date.toISOString().split("T")[0];
+        return <span>{dateOnly}</span>;
+      }
     },
   },
+
   {
     accessorKey: "endedAt",
     header: "End",
-    cell: ({row}) => {
-      if (row.getValue("endedAt")) {
+    cell: ({ row }) => {
+      const idea = row.original;
+      console.log(idea, "idea");
+      if (
+        row.getValue("endedAt") &&
+        idea.status !== "pending" &&
+        idea.status !== "rejected"
+      ) {
         const date = new Date(Math.floor(row.getValue("endedAt")));
         const dateOnly = date.toISOString().split("T")[0];
         return <span>{dateOnly}</span>;
       }
     },
   },
+
   {
     id: "actions",
-    cell: ({row}) => {
+    cell: ({ row }) => {
       // queries based on status.
 
       const idea = row.original;

@@ -30,8 +30,9 @@ export function DataTable<TData, TValue>({
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
-  console.log(data[0], "data table");
-  return (
+
+  
+    return (
     <div className="rounded-md  w-full border">
       <Table>
         <TableHeader>

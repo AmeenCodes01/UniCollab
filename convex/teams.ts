@@ -29,11 +29,12 @@ export const accept = mutation({
   handler: async (ctx, {ideaId, interestedId}) => {
     //move to team with ideaId
     const user = await getCurrentUserOrThrow(ctx);
-    await ctx.db.insert("teams", {userId: user._id, ideaId});
+    await ctx.db.insert("teams", {userId: user._id, ideaId, owner: false});
     await ctx.db.delete(interestedId);
   },
 });
-export const del = mutation({
+
+export const delUser = mutation({
   args: {ideaId: v.id("ideas"), userId: v.id("users")},
   handler: async (ctx, {ideaId, userId}) => {
     const teamUser = await ctx.db
@@ -45,5 +46,12 @@ export const del = mutation({
     if (teamUser) {
       await ctx.db.delete(teamUser._id);
     }
+  },
+});
+
+export const del = mutation({
+  args: {id: v.id("teams")},
+  handler: async ({db}, {id}) => {
+    await db.delete(id);
   },
 });

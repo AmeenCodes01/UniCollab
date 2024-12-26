@@ -1,52 +1,71 @@
-import IdeaCard from "@/app/components/IdeaCard";
-import React from "react";
-import projects from "@/../projects.json";
-import {CardTitle} from "@/components/ui/card";
-import {Dialog} from "@/components/ui/dialog";
-import {DialogTrigger} from "@radix-ui/react-dialog";
-import IdeaDialogue from "@/app/components/IdeaDialogue";
+"use client";
+import React, {useEffect, useState} from "react";
 
-//display interested projects
-//your ideas. interest shown.
+import {Input} from "@/components/ui/input";
+import {useAction, useMutation, useQuery} from "convex/react";
+import {api} from "../../../../convex/_generated/api";
+import {Label} from "@/components/ui/label";
+import {Button} from "@/components/ui/button";
+
+// email, name, year, course. simple
 function profile() {
-  return (
-    <div className="w-full  flex flex-col">
-      <h1 className="text-black"> History</h1>
-      <div className=" ">
-        <h1 className="text-2xl font-bold ">Ideas pitched</h1>
-        <div className="grid md:grid-rows-3   items-center ">
-          {projects.length !== 0
-            ? projects.slice(0, 3).map((idea, i) => (
-                <Dialog key={i}>
-                  <DialogTrigger>
-                    <CardTitle className="font-cinzel text-md font-medium  p-2 text-start ">
-                      {idea.title}
-                    </CardTitle>
-                  </DialogTrigger>
-                  <IdeaDialogue title={idea.title} desc={idea.description} />
-                </Dialog>
-              ))
-            : null}
-        </div>
-      </div>
+  //user can change/add details here.
+  const user = useQuery(api.users.current);
+  const update = useMutation(api.users.update);
+  const [email, setEmail] = useState(user?.email ?? "");
+  const [year, setYear] = useState(user?.year ?? "");
+  const [course, setCourse] = useState(user?.course ?? "");
+  const [edit, setEdit] = useState(false);
+  console.log(user, "user in profile");
 
+  useEffect(() => {
+    setEmail(user?.email ?? "");
+    setYear(user?.year ?? "");
+    setCourse(user?.course ?? "");
+  }, [user]);
+
+  const onEditSave = () => {
+    setEdit((prev) => {
+      //save user
+      if (prev && year !== "" && course !== "") {
+        //saving
+        const data = {
+          course,
+          year: parseInt(year as string),
+        };
+        update({data});
+      }
+      return !prev;
+    });
+  };
+
+  return (
+    <div className="w-full  flex gap-4 flex-col">
+      <h1 className="font-bold">Profile</h1>
       <div>
-        <h1 className="text-2xl font-bold ">Ideas Interested In</h1>
-        <div className="grid md:grid-rows-3   items-center ">
-          {projects.length !== 0
-            ? projects.slice(0, 3).map((idea, i) => (
-                <Dialog key={i}>
-                  <DialogTrigger>
-                    <CardTitle className="font-cinzel text-md font-medium border-[1.5px]  p-2 text-start ">
-                      {idea.title}
-                    </CardTitle>
-                  </DialogTrigger>
-                  <IdeaDialogue title={idea.title} desc={idea.description} />
-                </Dialog>
-              ))
-            : null}
-        </div>
+        <Label>Email</Label>
+        <Input disabled={true} value={email} />
       </div>
+      <div className="flex flex-col gap-2">
+        <Label>Year</Label>
+        <Input
+          type="number"
+          value={year}
+          min={1}
+          max={5}
+          onChange={(e) => setYear(e.target.value)}
+          disabled={!edit}
+        />
+      </div>
+      <div className="flex flex-col gap-2">
+        <Label>Course</Label>
+        <Input
+          value={course}
+          onChange={(e) => setCourse(e.target.value)}
+          disabled={!edit}
+        />
+      </div>
+      <Button onClick={onEditSave}>{!edit ? "Edit" : "Save"}</Button>
     </div>
   );
 }

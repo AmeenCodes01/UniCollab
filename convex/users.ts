@@ -1,6 +1,14 @@
 import {UserJSON} from "@clerk/backend";
 import {v, Validator} from "convex/values";
-import {internalMutation, query, QueryCtx} from "./_generated/server";
+import {
+  action,
+  internalMutation,
+  mutation,
+  query,
+  QueryCtx,
+} from "./_generated/server";
+import {api, internal} from "./_generated/api";
+import {Doc} from "./_generated/dataModel";
 
 export const getUsers = query({
   args: {},
@@ -26,10 +34,11 @@ export const current = query({
 export const upsertFromClerk = internalMutation({
   args: {data: v.any() as Validator<UserJSON>},
   async handler(ctx, {data}) {
-    console.log("hello from upsert");
-    console.log(data.email_addresses, "email adresses");
+   
     const userAttributes = {
-      email: data.email_addresses[0].email_address,
+      email: data.external_accounts
+        ? (data.external_accounts[0].username as string)
+        : data.email_addresses[0].email_address,
       clerkUserId: data.id,
       firstName: data.first_name ?? undefined,
       lastName: data.last_name ?? undefined,
@@ -73,6 +82,7 @@ export async function getCurrentUser(ctx: QueryCtx) {
   if (identity === null) {
     return null;
   }
+
   return await userByClerkUserId(ctx, identity.subject);
 }
 
@@ -82,3 +92,15 @@ async function userByClerkUserId(ctx: QueryCtx, clerkUserId: string) {
     .withIndex("byClerkUserId", (q) => q.eq("clerkUserId", clerkUserId))
     .unique();
 }
+export const update = mutation({
+  args: {
+    data: v.object({
+      course: v.string(),
+      year: v.number(),
+    }),
+  },
+  handler: async (ctx, {data}) => {
+    const user = await getCurrentUserOrThrow(ctx);
+    await ctx.db.patch(user._id, data);
+  },
+});

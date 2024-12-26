@@ -2,8 +2,7 @@ import React from "react";
 import {Button} from "./ui/button";
 import Link from "next/link";
 import {Archive} from "lucide-react";
-import {SignInButton, UserButton} from "@clerk/nextjs";
-import {Authenticated, Unauthenticated} from "convex/react";
+import { UserButton} from "@clerk/nextjs";
 import {ModeToggle} from "./ui/modeToggle";
 function Header() {
   return (
