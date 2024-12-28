@@ -25,11 +25,14 @@ export const accept = mutation({
   args: {
     ideaId: v.id("ideas"),
     interestedId: v.id("interested"),
+    userId: v.id("users")
   },
-  handler: async (ctx, {ideaId, interestedId}) => {
+  handler: async (ctx, {ideaId, interestedId, userId}) => {
     //move to team with ideaId
     const user = await getCurrentUserOrThrow(ctx);
-    await ctx.db.insert("teams", {userId: user._id, ideaId, owner: false});
+
+
+    await ctx.db.insert("teams", {userId: userId, ideaId, owner: false});
     await ctx.db.delete(interestedId);
   },
 });

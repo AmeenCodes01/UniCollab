@@ -46,6 +46,13 @@ export const columns: ColumnDef<
       }
     },
   },
+  {
+    accessorKey: "status",
+    header: "Status",
+    meta: {
+      filterVariant: 'select',
+    },
+  },
 
   {
     id: "actions",

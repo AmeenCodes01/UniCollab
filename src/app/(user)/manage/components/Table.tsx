@@ -21,6 +21,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useState } from "react";
+import Filter from "@/components/ui/table-filter";
+
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -66,6 +68,12 @@ export function DataTable<TData, TValue>({
                           header.column.columnDef.header,
                           header.getContext()
                         )}
+                        {header.column.getCanFilter() ? (
+                          <div>
+                            
+                            <Filter column={header.column} />
+                          </div>
+                        ) : null}
                   </TableHead>
                 );
               })}

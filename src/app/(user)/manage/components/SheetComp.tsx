@@ -22,13 +22,16 @@ function SheetComp({idea}: {idea: Doc<"ideas">}) {
       ? useQuery(api.interested.get, {ideaId: idea._id})
       : null;
 
+  console.log(interested,"interested")
+
   const team = useQuery(api.teams.get, {ideaId: idea._id});
   const accept = useMutation(api.teams.accept);
   const reject = useMutation(api.interested.reject);
   const remove = useMutation(api.teams.delUser);
   const delIdea = useAction(api.ideas.delIdeasAndRelated);
-  const acceptUser = (id: Id<"interested">) =>
-    accept({ideaId: idea._id, interestedId: id});
+
+  const acceptUser = (id: Id<"interested">, userId: Id<"users">) =>
+    accept({ideaId: idea._id, interestedId: id, userId});
 
   const rejectUser = (id: Id<"interested">) =>
     reject({ideaId: idea._id, type: "interested"});
@@ -36,6 +39,7 @@ function SheetComp({idea}: {idea: Doc<"ideas">}) {
   const onRemove = (id: Id<"users">) => {
     remove({ideaId: idea._id, userId: id});
   };
+
   const createQueryString = (name: string, value: string) => {
     const params = new URLSearchParams();
     params.set(name, value);
@@ -103,7 +107,7 @@ function SheetComp({idea}: {idea: Doc<"ideas">}) {
                     <div className="flex gap-2 flex-row justify-end ">
                       <Button
                         onClick={() =>
-                          acceptUser(u?.interestedId as Id<"interested">)
+                          acceptUser(u?.interestedId as Id<"interested">,  u?._id as Id<"users">)
                         }>
                         Accept
                       </Button>

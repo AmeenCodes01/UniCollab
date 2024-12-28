@@ -2,10 +2,7 @@ import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import {DataTable} from "./Table";
 import {columns} from "./columns";
 import {Doc} from "../../../../../convex/_generated/dataModel";
-import {fetchQuery} from "convex/nextjs";
-import {api} from "../../../../../convex/_generated/api";
-import {getAuthToken} from "@/auth";
-import { pendRejcols } from "./status/PendRejCols";
+
 
 const ProjectManage = async ({
   data,
@@ -13,18 +10,17 @@ const ProjectManage = async ({
   data: (Doc<"ideas"> & {type: "interested" | "saved" | "member" | "author"})[];
 }) => {
 
-  const open = data.filter(
-    (idea) => idea.type == "author" && idea.status == "open"
+  const pitched = data.filter(
+    (idea) => idea.type == "author" 
   );
-  const closed = data.filter(
-    (idea) =>
-      idea.status == "closed" &&
-      (idea.type == "member" || idea.type == "author")
+  const member = data.filter(
+    (idea) => idea.type == "member" 
   );
-
-  const interested = data.filter((idea) => idea.type === "interested");
+  
+  const interested= data.filter((idea) => idea.type === "interested" );
   const saved = data.filter((idea) => idea.type === "saved");
-  const pendRej = data.filter(idea=> idea.status=="pending" || idea.status=="rejected")
+
+  
   return (
     <Tabs defaultValue="pitched" className=" w-[70%]  ">
       <TabsList className="w-full ">
@@ -36,13 +32,13 @@ const ProjectManage = async ({
           Saved/Interested
         </TabsTrigger>
 
-        <TabsTrigger value="pendRej" className="w-full">
-          Awaiting/Rejected
+        <TabsTrigger value="member" className="w-full">
+          Member
         </TabsTrigger>
       </TabsList>
       <TabsContent value="pitched" className="w-full">
         {/* <DataTable columns={columns} data={open} /> */}
-        <Tabs defaultValue="open">
+        {/* <Tabs defaultValue="open">
           <TabsList className="w-full ">
             <TabsTrigger value="open" className="w-full">
               Open
@@ -52,13 +48,14 @@ const ProjectManage = async ({
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="open" className="w-full">
-            <DataTable columns={columns} data={open} />
-          </TabsContent>
-          <TabsContent value="ongoing">
-            <DataTable columns={columns} data={closed} />
-          </TabsContent>
+          <TabsContent value="open" className="w-full"> */}
+            <DataTable columns={columns} data={pitched} />
+          {/* </TabsContent> */}
+          {/* <TabsContent value="ongoing">
+            <DataTable columns={columns} data={closed} /> 
+          </TabsContent> 
         </Tabs>
+            */}
       </TabsContent>
       <TabsContent value="saved/interested">
         <Tabs defaultValue="interested">
@@ -74,19 +71,19 @@ const ProjectManage = async ({
             <DataTable columns={columns} data={saved} />
           </TabsContent>
           <TabsContent value="interested">
-            {" "}
             <DataTable columns={columns} data={interested} />
+            {" "}
           </TabsContent>
         </Tabs>
       </TabsContent>
-      <TabsContent value="pendRej">
+      <TabsContent value="member">
 
-      <DataTable columns={pendRejcols} data={pendRej} />
-      </TabsContent>
-      {/* <TabsContent value="completed">
-      </TabsContent> */}
+      <DataTable columns={columns} data={member} />
+      </TabsContent> 
+      
     </Tabs>
   );
 };
 
 export default ProjectManage;
+
