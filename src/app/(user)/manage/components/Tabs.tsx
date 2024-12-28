@@ -5,7 +5,7 @@ import {Doc} from "../../../../../convex/_generated/dataModel";
 import {fetchQuery} from "convex/nextjs";
 import {api} from "../../../../../convex/_generated/api";
 import {getAuthToken} from "@/auth";
-import { pendRejcols } from "./status/PendRejInfo";
+import { pendRejcols } from "./status/PendRejCols";
 
 const ProjectManage = async ({
   data,
@@ -25,7 +25,6 @@ const ProjectManage = async ({
   const interested = data.filter((idea) => idea.type === "interested");
   const saved = data.filter((idea) => idea.type === "saved");
   const pendRej = data.filter(idea=> idea.status=="pending" || idea.status=="rejected")
-  console.log(pendRej,"pendRej")
   return (
     <Tabs defaultValue="pitched" className=" w-[70%]  ">
       <TabsList className="w-full ">

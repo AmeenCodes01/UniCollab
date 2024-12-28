@@ -5,6 +5,7 @@ import IdeaDialogue from "@/app/components/IdeaDialogue";
 import InterestBtn from "@/app/components/InterestBtn";
 import DelBtn from "./DelButton";
 import {IdeaWithType} from "../../../../../env";
+import { DialogTitle } from "@radix-ui/react-dialog";
 
 type Props = {idea: IdeaWithType};
 
@@ -14,6 +15,7 @@ function DialogueComp({idea}: Props) {
       <DialogTrigger>
         <MoreHorizontal className="h-4 w-4" />
       </DialogTrigger>
+      <DialogTitle></DialogTitle>
       <IdeaDialogue
         title={idea.title}
         desc={idea.description}

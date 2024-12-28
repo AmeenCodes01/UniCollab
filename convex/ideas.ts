@@ -17,6 +17,8 @@ export const get = query({
       .query("ideas")
       .filter((i) => i.eq(i.field("authorId"), user._id))
       .collect();
+
+     const authoredIds = authoredIdeas.map(idea=> idea._id) 
     const authored = authoredIdeas.map((idea) => ({
       ...idea,
       type: "author",
@@ -28,9 +30,10 @@ export const get = query({
       .withIndex("by_userId", (q) => q.eq("userId", user._id))
       .collect();
 
-    const teamIdeaIds = userTeams.map((u) => u.ideaId);
+    const teamIdeaIds = userTeams.filter(Boolean).map((u) =>  authoredIds.includes(u.ideaId)? null : u.ideaId).filter(Boolean)
 
-    const teamIdeas = await getAll(ctx.db, teamIdeaIds);
+    const teamIdeas = await getAll(ctx.db, teamIdeaIds as Id<"ideas">[]);
+
     const member = teamIdeas
       .filter(Boolean)
       .map((idea) =>
@@ -65,7 +68,6 @@ export const get = query({
 
     // Combine all ideas into a single list
     const allIdeas = [...authored, ...member, ...interested];
-
     // Return the combined list
     return allIdeas;
   },
@@ -128,7 +130,7 @@ export const getPendRej = query({
     if(user.councilMember){
       const ideas = await ctx.db.query("ideas")
       .withIndex("by_status", i=> i.eq("status", "pending"))
-      .filter( i => i.eq(i.field("status"),"rejected") ).collect()
+       .collect()
       return ideas
     }
   }

@@ -8,7 +8,7 @@ import DialogueComp from "../DialogueComp";
 import { Button } from "@/components/ui/button";
 import PendRejSheet from "./Sheet";
 export const pendRejcols: ColumnDef<
-  Doc<"ideas"> & { type: "interested" | "saved" | "member" | "author" }
+  Doc<"ideas"> 
 >[] = [
   {
     accessorKey: "title",
@@ -25,6 +25,8 @@ export const pendRejcols: ColumnDef<
       // queries based on status.
 
       const idea = row.original;
+      // const { asPath } = useRouter()
+      // console.log(asPath,"asPath")
       // we need I D E A.
       //disaster: INTERESTED HAS USERIDs, NEED INTERESTED ID.
       return (
