@@ -7,9 +7,10 @@ import {Doc, Id} from "../../../../../convex/_generated/dataModel";
 
 function IdeasList({
   ideasArr,
+  
 }: {
   ideasArr: (Doc<"ideas"> & {
-    user: {firstName?: string; course?: string; email?: string}[];
+    user: {firstName?: string; course?: string; email?: string;displayName?:string;}[];
   })[];
 }) {
   const [search, setSearch] = useState("");
@@ -22,6 +23,7 @@ function IdeasList({
         )
       : ideasArr;
 
+  console.log(ideasArr,"ideasArr")    
   return (
     <div>
       <div className="flex gap-4 mb-6">
@@ -64,7 +66,7 @@ function IdeasList({
                 desc={idea.description}
                 // tags={idea.tags}
                 lookingFor={idea.lookingFor}
-                author={idea?.user[0]?.firstName}
+                author={idea?.user[0]?.displayName ??idea?.user[0]?.firstName}
                 course={idea?.user[0]?.course}
                 email={idea?.user[0]?.email}
                 meetingFormat={idea.meetingFormat}

@@ -97,6 +97,7 @@ export const update = mutation({
     data: v.object({
       course: v.string(),
       year: v.number(),
+      displayName: v.string()
     }),
   },
   handler: async (ctx, {data}) => {

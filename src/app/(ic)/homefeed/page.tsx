@@ -30,7 +30,7 @@ async function HomeFeed() {
       <IdeasList
         ideasArr={
           ideas as (Doc<"ideas"> & {
-            user: {firstName?: string; course?: string; email?: string}[];
+            user: {firstName?: string; course?: string; email?: string; displayName?:string;}[];
           })[]
         }
       />
