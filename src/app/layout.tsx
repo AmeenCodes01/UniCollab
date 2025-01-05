@@ -3,6 +3,7 @@ import AuthScreen from "./auth/component/AuthScreen";
 import "./globals.css";
 import Header from "@/components/header";
 import {ThemeProvider} from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
@@ -18,6 +19,7 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
             <div className="flex-1 flex flex-col   ">
               <Header />
               <div className="px-4 py-2 flex-1 overflow-auto flex-col w-full ">{children}</div>
+              <Toaster/>
             </div>
           </Providers>
         </ThemeProvider>
