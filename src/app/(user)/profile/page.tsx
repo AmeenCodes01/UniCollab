@@ -6,6 +6,7 @@ import {useAction, useMutation, useQuery} from "convex/react";
 import {api} from "../../../../convex/_generated/api";
 import {Label} from "@/components/ui/label";
 import {Button} from "@/components/ui/button";
+import { SignOutButton } from "@clerk/nextjs";
 
 // email, name, year, course. simple
 function profile() {
@@ -40,9 +41,12 @@ function profile() {
   };
 
   return (
-    <div className="w-full  flex gap-4 flex-col">
-      <h1 className="font-bold">Profile</h1>
-      <div>
+    <div className="w-full  flex gap-4 flex-col justify-center items-center">
+      <h1 className="font-bold text-2xl self-start">Profile</h1>
+      <form action="" className="w-[500px] flex gap-4 flex-col">
+
+      <div className="flex flex-col gap-2">
+
         <Label>Email</Label>
         <Input disabled={true} value={email} />
       </div>
@@ -55,7 +59,7 @@ function profile() {
           max={5}
           onChange={(e) => setYear(e.target.value)}
           disabled={!edit}
-        />
+          />
       </div>
       <div className="flex flex-col gap-2">
         <Label>Course</Label>
@@ -63,9 +67,12 @@ function profile() {
           value={course}
           onChange={(e) => setCourse(e.target.value)}
           disabled={!edit}
-        />
+          />
       </div>
-      <Button onClick={onEditSave}>{!edit ? "Edit" : "Save"}</Button>
+      <Button className="ml-auto " onClick={onEditSave}>{!edit ? "Edit" : "Save"}</Button>
+          </form>
+          <SignOutButton/>
+          
     </div>
   );
 }

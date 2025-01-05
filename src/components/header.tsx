@@ -1,7 +1,7 @@
 import React from "react";
 import {Button} from "./ui/button";
 import Link from "next/link";
-import {Archive} from "lucide-react";
+import {Archive, User} from "lucide-react";
 import { UserButton} from "@clerk/nextjs";
 import {ModeToggle} from "./ui/modeToggle";
 function Header() {
@@ -41,8 +41,14 @@ function Header() {
             Share
           </Button>
         </Link>
-        <UserButton />
+        <Link href={"/profile"}>
+        <Button className=" bg-green-700" variant={"outline"}>
+          
+        <User   size={35}/>
+        </Button>
+        </Link>
         <ModeToggle />
+<UserButton/>
         {/* </Authenticated> */}
       </div>
       {/* <span className="italic pl-2 text-gray-700  text-sm bg-gray-100">

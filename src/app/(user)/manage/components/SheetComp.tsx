@@ -29,7 +29,7 @@ function SheetComp({idea}: {idea: Doc<"ideas">}) {
   const reject = useMutation(api.interested.reject);
   const remove = useMutation(api.teams.delUser);
   const delIdea = useAction(api.ideas.delIdeasAndRelated);
-
+  const user = useQuery(api.users.current)
   const acceptUser = (id: Id<"interested">, userId: Id<"users">) =>
     accept({ideaId: idea._id, interestedId: id, userId});
 
@@ -78,12 +78,12 @@ function SheetComp({idea}: {idea: Doc<"ideas">}) {
                   <span className="">
                     <span>{u?.email}</span>
                   </span>
-                  <Button
+                  {idea.authorId === user?._id &&<Button
                     className="w-fit justify-end"
                     variant={"destructive"}
                     onClick={() => onRemove(u?._id as Id<"users">)}>
                     Remove
-                  </Button>
+                  </Button>}
                 </div>
               ))
             : ""}
@@ -126,7 +126,7 @@ function SheetComp({idea}: {idea: Doc<"ideas">}) {
             ""
           )}
         </div>
-        <div
+       {idea.authorId === user?._id && <div
           className="mb-3 flex flex-col mt-auto
            gap-3      w-full
         ">
@@ -139,7 +139,7 @@ function SheetComp({idea}: {idea: Doc<"ideas">}) {
             onClick={onDelIdea}>
             Delete{" "}
           </Button>
-        </div>
+        </div>}
       </SheetContent>
     </Sheet>
   );

@@ -15,9 +15,9 @@ export default function RootLayout({children}: {children: React.ReactNode}) {
           disableTransitionOnChange>
           {/* Wrap the application in Providers for authentication management */}{" "}
           <Providers>
-            <div className="flex-1 flex flex-col">
+            <div className="flex-1 flex flex-col   ">
               <Header />
-              <div className="px-4 py-2 flex-1 overflow-auto">{children}</div>
+              <div className="px-4 py-2 flex-1 overflow-auto flex-col w-full ">{children}</div>
             </div>
           </Providers>
         </ThemeProvider>

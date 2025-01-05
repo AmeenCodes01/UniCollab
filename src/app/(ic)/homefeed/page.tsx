@@ -17,7 +17,7 @@ async function HomeFeed() {
 
   //what about the ideas user is already a team member of.
   return (
-    <div className=" w-full h-[100%] flex flex-col max-w-7xl mx-auto  ">
+    <div className=" w-full h-[100%] flex flex-col  mx-auto   ">
       <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 mb-6">
         <h2 className="font-medium text-lg text-black">
           👋 Welcome to UniCollab!
