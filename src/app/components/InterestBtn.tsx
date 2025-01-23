@@ -7,7 +7,7 @@ import {api} from "../../../convex/_generated/api";
 import SaveLaterBtn from "./SaveLaterBtn";
 import {navigate} from "@/actions/manageRefresh";
 import {emailInterest} from "@/lib/emailInterest";
-
+import {useClipboardWithToast} from"@/hooks/useCopyEmail"
 const InterestBtn = ({
   title,
   ideaId,
@@ -21,7 +21,9 @@ const InterestBtn = ({
 }) => {
   const express = useMutation(api.interested.accept);
   const del = useMutation(api.interested.reject);
+
   const user = useQuery(api.users.current);
+  const {copyToClipboard}= useClipboardWithToast()
   const onPress = (type: "interested" | "saved" | "del") => {
     type !== "del"
       ? express({ideaId, type})
@@ -29,11 +31,17 @@ const InterestBtn = ({
             console.error(error, "e");
           })
           .then((result) => {
-            result?.status == "error"
-              ? alert(result?.message)
-              : type == "interested"
-                ? emailInterest(title, user?.email as string)
-                : null;
+
+
+
+            if (result?.status === "error") {
+              alert(result?.message);
+            } else {
+              if (type === "interested") {
+                emailInterest(title, user?.email as string);
+                copyToClipboard(user?.email as string);
+              }
+            }
           })
       : del({ideaId, type: "saved"});
     type == "del" || mode == "del" ? navigate() : null;

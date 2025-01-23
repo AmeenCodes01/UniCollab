@@ -13,7 +13,6 @@ async function HomeFeed() {
     {status: "open"},
     {token}
   );
-  const user = await fetchQuery(api.users.current);
 
   //what about the ideas user is already a team member of.
   return (

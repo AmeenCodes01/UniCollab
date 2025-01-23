@@ -78,12 +78,12 @@ function SheetComp({idea}: {idea: Doc<"ideas">}) {
                   <span className="">
                     <span>{u?.email}</span>
                   </span>
-                  {idea.authorId === user?._id &&<Button
+                  {idea.authorId === user?._id && u?.email !== user.email ?<Button
                     className="w-fit justify-end"
                     variant={"destructive"}
                     onClick={() => onRemove(u?._id as Id<"users">)}>
                     Remove
-                  </Button>}
+                  </Button>:null}
                 </div>
               ))
             : ""}

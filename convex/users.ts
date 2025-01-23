@@ -34,7 +34,7 @@ export const current = query({
 export const upsertFromClerk = internalMutation({
   args: {data: v.any() as Validator<UserJSON>},
   async handler(ctx, {data}) {
-   
+    console.log(data,"data for new user right")
     const userAttributes = {
       email: data.external_accounts
         ? (data.external_accounts[0].username as string)
@@ -44,13 +44,17 @@ export const upsertFromClerk = internalMutation({
       lastName: data.last_name ?? undefined,
       imageUrl: data.image_url ?? undefined,
     };
+    if(userAttributes.email.includes("reading.ac.uk")){
 
-    const user = await userByClerkUserId(ctx, data.id);
-
-    if (user === null) {
-      await ctx.db.insert("users", userAttributes);
-    } else {
-      await ctx.db.patch(user._id, userAttributes);
+      const user = await userByClerkUserId(ctx, data.id);
+  
+      if (user === null) {
+        await ctx.db.insert("users", userAttributes);
+      } else {
+        await ctx.db.patch(user._id, userAttributes);
+      }
+    }else{
+      console.log("NOT A UNI EMAIL")
     }
   },
 });

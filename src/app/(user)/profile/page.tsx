@@ -40,10 +40,12 @@ function profile() {
     });
   };
 
+
+
   return (
     <div className="w-full  flex gap-4 flex-col justify-center items-center">
       <h1 className="font-bold text-2xl self-start">Profile</h1>
-      <form action="" className="w-[500px] flex gap-4 flex-col">
+      <div  className="w-[500px] flex gap-4 flex-col">
 
       <div className="flex flex-col gap-2">
 
@@ -69,8 +71,8 @@ function profile() {
           disabled={!edit}
           />
       </div>
-      <Button className="ml-auto " onClick={onEditSave}>{!edit ? "Edit" : "Save"}</Button>
-          </form>
+      <Button className="ml-auto " onClick={()=>onEditSave()}>{!edit ? "Edit" : "Save"}</Button>
+          </div>
           <SignOutButton/>
           
     </div>

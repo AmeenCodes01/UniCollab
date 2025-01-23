@@ -108,7 +108,7 @@ export const getAllIdeas = query({
         //archive
         await db
             .query("ideas")
-            .filter((i) => i.neq(i.field("status"), status))
+            .filter((i) => i.neq(i.field("status"), "open"))
             .filter((i) => i.neq(i.field("status"), "pending"))
             .filter((i) => i.neq(i.field("status"), "rejected"))  
             .collect();

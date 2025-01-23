@@ -11,7 +11,7 @@ export default defineSchema({
     course: v.optional(v.string()),
     imageUrl: v.optional(v.string()),
     councilMember : v.optional( v.boolean()),
-   // displayName:v.optional(v.string())
+    displayName:v.optional(v.string())
   }).index("byClerkUserId", ["clerkUserId"]),
 
   ideas: defineTable({

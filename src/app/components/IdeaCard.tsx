@@ -10,6 +10,7 @@ type Props = {
   email?: string;
   btn?: React.ReactElement;
   meetingFormat?: string;
+  style?:string
 };
 import IdeaDialogue from "@/app/components/IdeaDialogue";
 import {Badge} from "@/components/ui/badge";
@@ -38,13 +39,14 @@ function IdeaCard({
   email,
   meetingFormat,
   btn,
+  style
 }: Props) {
   //a profile page for name + year.
 
   return (
     <div className="flex h-[100%] flex-col ">
       <Dialog>
-        <Card className="border-[2px] h-full  border-blue-100 shadow-md hover:shadow-inner flex flex-col  ">
+        <Card className={"border-[2px] h-full  border-blue-100 shadow-md hover:shadow-inner flex flex-col  "+style}>
           <DialogTrigger asChild>
             <div>
               <CardHeader className="mt-0">

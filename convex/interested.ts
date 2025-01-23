@@ -77,17 +77,18 @@ export const accept = mutation({
   handler: async (ctx, {ideaId, type}) => {
     const user = await getCurrentUserOrThrow(ctx);
     const existingInterest = await ctx.db
-      .query("interested")
-      .withIndex("by_userId_ideaId", (q) =>
-        q.eq("userId", user._id).eq("ideaId", ideaId)
-      )
-      .unique();
-    //if existingInterest exists with type "saved" & arg type is "interested", simply change type.
-    //if existingInterest exist with type"interested" & arg type is "Interested", send back message
-    //if doesn't exist,
-
-    // what if you're already a team member ? need to check in team as well.
-
+    .query("interested")
+    .withIndex("by_userId_ideaId", (q) =>
+      q.eq("userId", user._id).eq("ideaId", ideaId)
+  )
+  .unique();
+  //if existingInterest exists with type "saved" & arg type is "interested", simply change type.
+  //if existingInterest exist with type"interested" & arg type is "Interested", send back message
+  //if doesn't exist,
+  console.log(existingInterest,"existingInt")
+  console.log(type,"type")
+  
+  // what if you're already a team member ? need to check in team as well.
     const existingMember = await ctx.db
       .query("teams")
       .withIndex("by_ideaId_userId", (t) =>
@@ -95,17 +96,40 @@ export const accept = mutation({
       )
       .unique();
 
-    if (existingInterest?.type == "interested" && type == "interested") {
-      return {status: "error", message: "You've already expressed interest"};
+      // if(existingInterest){
+      // const  intType = existingInterest?.type
+      
+      //   if(intType=="interested"){
+
+      //   }else{
+
+
+      //   }
+
+      // }
+
+
+
+
+    if (existingInterest) {
+      //interest already exists
+
+      if ( existingInterest?.type =="saved" && type=="interested") {
+        return await ctx.db.patch(existingInterest._id, {type});
+      }
+    
+        return {status: "error", message: `You've already ${existingInterest?.type == "interested"? "expressed interest in" :"saved"} this idea `};
+        
+      // else{
+      //   return {status: "error", message: "You've already expressed interest"};
+      // }
     }
+
     if (existingMember) {
       return {
         status: "error",
         message: "You're already a member of this project",
       };
-    }
-    if (existingInterest?.type == "saved" && type == "interested") {
-      return await ctx.db.patch(existingInterest._id, {type});
     }
 
     await ctx.db.insert("interested", {
@@ -113,6 +137,7 @@ export const accept = mutation({
       userId: user._id,
       type,
     });
+
     return {status: "success", message: ""};
 
     //insert to interested with userId & ideaId.
