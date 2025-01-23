@@ -1,4 +1,3 @@
-import { useQueries, useQuery } from "convex/react";
 import { pendRejcols } from "../manage/components/status/PendRejCols";
 import { DataTable } from "../manage/components/Table";
 import { api } from "../../../../convex/_generated/api";

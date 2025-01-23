@@ -7,3 +7,8 @@ export async function navigate() {
   revalidatePath("/manage");
   redirect("/manage");
 }
+
+export async function navigateApproval(){
+  revalidatePath("/approval");
+  redirect("/approval");
+}

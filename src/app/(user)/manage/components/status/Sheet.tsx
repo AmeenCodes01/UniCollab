@@ -1,4 +1,3 @@
-"use client";
 import {
   Sheet,
   SheetContent,
@@ -14,9 +13,11 @@ import { api } from "../../../../../../convex/_generated/api";
 import { useMutation, useQuery } from "convex/react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/compat/router";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { revalidatePath } from "next/cache";
+import {navigateApproval} from "@/actions/manageRefresh"
 function PendRejSheet({ idea }: { idea: Doc<"ideas"> }) {
   const [reason, setReason] = useState("");
   // render based on whether user is a councilMember or not.
@@ -24,11 +25,13 @@ function PendRejSheet({ idea }: { idea: Doc<"ideas"> }) {
   const action = useMutation(api.ideas.changeStatus);
   const pathname = usePathname();
 
+
+
   console.log(pathname);
   //   const token = await getAuthToken()
 
   const Content = () => {
-    if (pathname == "/manage") {
+    if (pathname == "/manage") { 
       return (
         <>
           {idea.status == "rejected" ? (
@@ -49,7 +52,10 @@ function PendRejSheet({ idea }: { idea: Doc<"ideas"> }) {
         <div className="flex gap-4 flex-col">
           <Button
             className="w-full"
-            onClick={() => action({ status: "open", ideaId: idea._id })}
+            onClick={() => {
+              action({ status: "open", ideaId: idea._id });
+              navigateApproval();
+            }}
           >
             Approve
           </Button>
@@ -67,6 +73,7 @@ function PendRejSheet({ idea }: { idea: Doc<"ideas"> }) {
                   ideaId: idea._id,
                   rejectedReason: reason,
                 });
+                navigateApproval();
               } else {
                 alert("please give a reason.");
               }
@@ -105,7 +112,10 @@ function PendRejSheet({ idea }: { idea: Doc<"ideas"> }) {
           <div className="flex gap-4 flex-col">
             <Button
               className="w-full"
-              onClick={() => action({ status: "open", ideaId: idea._id })}
+              onClick={() => {
+                action({ status: "open", ideaId: idea._id });
+                navigateApproval();
+              }}
             >
               Approve
             </Button>
@@ -123,6 +133,7 @@ function PendRejSheet({ idea }: { idea: Doc<"ideas"> }) {
                     ideaId: idea._id,
                     rejectedReason: reason,
                   });
+                  navigateApproval();
                 } else {
                   alert("please give a reason.");
                 }

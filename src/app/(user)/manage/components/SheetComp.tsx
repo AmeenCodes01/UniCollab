@@ -46,6 +46,7 @@ function SheetComp({idea}: {idea: Doc<"ideas">}) {
 
     return params.toString();
   };
+  
   const onDelIdea = () => {
     delIdea({id: idea._id});
     navigate();
@@ -60,6 +61,7 @@ function SheetComp({idea}: {idea: Doc<"ideas">}) {
       </SheetTrigger>
       <SheetContent className="w-[400px] flex flex-col ">
         <SheetHeader>
+          {idea.title}
           <SheetDescription className=" w-full">
             {/* {interested?.[0]?.email ?? ""} */}
           </SheetDescription>
