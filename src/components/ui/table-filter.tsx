@@ -14,7 +14,7 @@ import {
 import { useEffect, useState } from 'react'
  export default function Filter({ column }: { column: Column<any, unknown> }) {
     const columnFilterValue = column.getFilterValue()
-    const { filterVariant } = column.columnDef.meta ?? {}
+    const { filterVariant } = column.columnDef.meta as any ?? {}
   
     return filterVariant === 'range' ? (
       <div>
