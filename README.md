@@ -1,57 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# Unicollab
 
-First, run the development server:
+https://uni-collab-eight.vercel.app/
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Overview
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Unicollab is a platform I built to help students collaborate on projects, gain experience, and connect across disciplines. As a first-year Maths and Computer Science student, I noticed that while many of us were working on personal skills or projects, it was difficult to find teammates with complementary skills.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Unicollab solves this by allowing students to:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+* Post project ideas.
+* Specify what skills they are looking for in collaborators.
+* Join projects regardless of skill level, making it inclusive for both beginners and experienced students.
 
-## Learn More
+The platform encourages learning by doing, teamwork, and building stronger projects by combining skills from different fields.
 
-To learn more about Next.js, take a look at the following resources:
+For example:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* A website project could benefit from a designer or artist.
+* A mental health app could be improved by working with psychology students.
+* Projects can be anything from a simple game clone to an AI-driven app.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Background
 
-## Deploy on Vercel
+I originally began building Unicollab while in talks with professors and my department. The idea was to launch a real-world solution for students across the university.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Although the collaboration could not continue (and the project was paused before final polish), I implemented most of the functionality and deployed a working MVP. Professors acknowledged the value of the idea, but I decided to stop development when the support on the university side faded.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Current State
 
+* **Implemented**:
 
+  * Core functionality (posting, joining, saving projects).
+  * Authentication and backend integration.
+  * User flows for idea sharing and collaboration.
 
-Pitched : {
-    Open, 
-    Closed,
-    Completed
-    Rejected,
-    Pending
-}
+* **Pending/Incomplete**:
 
-Saved/Interested: {
-    Saved, 
-    Interested
-}
+  * UI polish and refinement.
+  * Minor improvements to UX and layout.
 
-Member:{
-    Open, 
-    Closed,
-    Completed
-}
+## Why This Project Matters
+
+* Builds **team-based experience** for students.
+* Helps students add **real collaborative work** to their portfolios.
+* Encourages cross-disciplinary projects where creativity and technical skills combine.
+
+## Demo
+
+A basic MVP has been deployed to demonstrate the core functionality.
