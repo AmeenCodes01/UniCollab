@@ -18,9 +18,10 @@ import {navigate} from "@/actions/manageRefresh";
 
 function SheetComp({idea}: {idea: Doc<"ideas">}) {
   const interested =
-    idea.status === "open"
-      ? useQuery(api.interested.get, {ideaId: idea._id})
-      : null;
+ useQuery(api.interested.get,     idea.status === "open"
+      ?{ideaId: idea._id}
+      : "skip"
+    )
 
   console.log(interested,"interested")
 

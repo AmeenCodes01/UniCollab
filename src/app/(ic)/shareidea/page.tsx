@@ -42,11 +42,10 @@ function ShareIdea() {
   //for edit
   const param = useSearchParams();
   const editId = param.get("id")?.toString();
-  const editIdea = editId
-    ? useQuery(api.ideas.getIdea, {
+  const editIdea =  useQuery(api.ideas.getIdea,editId? {
         ideaId: editId as Id<"ideas">,
-      })
-    : null;
+      }:"skip")
+    
   console.log(editId ? true : false, "edit");
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

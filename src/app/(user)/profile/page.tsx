@@ -9,7 +9,7 @@ import {Button} from "@/components/ui/button";
 import { SignOutButton } from "@clerk/nextjs";
 
 // email, name, year, course. simple
-function profile() {
+function Profile() {
   //user can change/add details here.
   const user = useQuery(api.users.current);
   const update = useMutation(api.users.update);
@@ -81,4 +81,4 @@ function profile() {
   );
 }
 
-export default profile;
+export default Profile;
