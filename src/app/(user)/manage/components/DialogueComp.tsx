@@ -23,7 +23,7 @@ function DialogueComp({idea}: Props) {
           idea.type == "interested" ? (
             <DelBtn ideaId={idea._id} title={idea.title} />
           ) : (
-            <InterestBtn ideaId={idea._id} title={idea.title} mode="del" />
+            <InterestBtn  ideaId={idea._id} title={idea.title} authId={idea.authorId} mode="del" />
           )
         }
       />
