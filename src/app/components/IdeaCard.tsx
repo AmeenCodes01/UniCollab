@@ -10,11 +10,10 @@ type Props = {
   email?: string;
   btn?: React.ReactElement;
   meetingFormat?: string;
-  style?:string
+  style?:string;
+  interested?: string | null
 };
 import IdeaDialogue from "@/app/components/IdeaDialogue";
-import {Badge} from "@/components/ui/badge";
-import {Button} from "@/components/ui/button";
 // import { Doc } from "../convex/_generated/dataModel";
 
 import {
@@ -26,7 +25,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {Dialog, DialogTrigger} from "@/components/ui/dialog";
-import {Id} from "../../../convex/_generated/dataModel";
 function IdeaCard({
   title,
   shortDesc,
@@ -39,14 +37,15 @@ function IdeaCard({
   email,
   meetingFormat,
   btn,
-  style
+  style,
+  interested
 }: Props) {
-  //a profile page for name + year.
 
+// if user alr interested, saved, show it so.
   return (
     <div className="flex h-[100%] flex-col ">
       <Dialog>
-        <Card className={"border-[2px] h-full  border-blue-100 shadow-md hover:shadow-inner flex flex-col  "+style}>
+        <Card className={"border-[1px] h-full  border-blue-100 shadow-md hover:shadow-inner flex flex-col  "+style}>
           <DialogTrigger asChild>
             <div>
               <CardHeader className="mt-0">
@@ -100,8 +99,9 @@ function IdeaCard({
           </CardFooter>
           {btn && (
             <span className=" text-xs italic self-start pl-6 pb-2 ">
-              On clicking interest, your email app will open with project title
-              and author's email.
+              {/* On clicking interest, your email app will open with project title
+              and author's email. */}
+              On clicking interest, author's email will be copied to clipboard.
             </span>
           )}
         </Card>

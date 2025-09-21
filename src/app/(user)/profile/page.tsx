@@ -73,7 +73,9 @@ function profile() {
       </div>
       <Button className="ml-auto " onClick={()=>onEditSave()}>{!edit ? "Edit" : "Save"}</Button>
           </div>
-          <SignOutButton/>
+          <SignOutButton>
+            <Button variant={"destructive"}>Sign Out</Button>
+          </SignOutButton>
           
     </div>
   );

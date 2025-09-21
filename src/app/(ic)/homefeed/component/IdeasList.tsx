@@ -4,6 +4,8 @@ import {Search, Code} from "lucide-react";
 import InterestBtn from "@/app/components/InterestBtn";
 import IdeaCard from "@/app/components/IdeaCard";
 import {Doc, Id} from "../../../../../convex/_generated/dataModel";
+import { useQuery } from "convex/react";
+import { api } from "../../../../../convex/_generated/api";
 
 function IdeasList({
   ideasArr,
@@ -12,6 +14,9 @@ function IdeasList({
     user: {firstName?: string; course?: string; email?: string}[];
   })[];
 }) {
+  
+  const interested = useQuery(api.interested.user)
+  const intset = new Map(interested?.map(i=>[i._id,i.type]))
   const [search, setSearch] = useState("");
   let filter = "all";
 
@@ -21,6 +26,10 @@ function IdeasList({
           idea.title.toLowerCase().includes(search.toLowerCase())
         )
       : ideasArr;
+
+//we get interested ideas here & if alr interested/saved disable ?
+
+//for each project, search.
 
   return (
     <div>
@@ -56,7 +65,10 @@ function IdeasList({
       {/* rows messed up with header, cols does not.  */}
       <div className="grid md:grid-cols-1   md:auto-cols-max gap-4 w-full  justify-center md:justify-normal items-center pb-4  ">
         {filteredIdeas.length !== 0
-          ? filteredIdeas.map((idea, i: number) => (
+          ? filteredIdeas.map((idea, i: number) => {
+           const interest = intset.get(idea._id) 
+            
+            return(
               <IdeaCard
                 key={i}
                 title={idea.title}
@@ -71,12 +83,15 @@ function IdeasList({
                 btn={
                   <InterestBtn
                     title={idea.title}
+                    disableInterest={interest && interest == "interested"}
+                    disableSave={interest && interest == "saved"}
                     ideaId={idea._id}
                     authId={idea.authorId as Id<"users">}
+
                   />
                 }
               />
-            ))
+            )})
           : null}
       </div>
     </div>

@@ -12,12 +12,14 @@ export const user = query({
   args: {},
   handler: async (ctx, {}) => {
     const user = await getCurrentUserOrThrow(ctx);
-
+    console.log(user," user")
     // Get all "interested" entries for the user
     const userInterest = await ctx.db
       .query("interested")
       .withIndex("by_userId_ideaId", (q) => q.eq("userId", user._id))
       .collect();
+
+      
 
     // Extract idea IDs from userInterest
     const ideaIds = userInterest.map((u) => u.ideaId);
@@ -27,9 +29,9 @@ export const user = query({
 
     // Fetch the ideas corresponding to the IDs
     const ideas = await getAll(ctx.db, ideaIds);
-
+    console.log(ideas,"ideas server")
     // Map the ideas and attach the `type` from userInterest
-    const ideaTypes = ideas.map((idea) => {
+    const ideaTypes = ideas.filter(Boolean).map((idea) => {
       // Find the matching interest entry
       const userInt = userInterest.find((u) => u.ideaId === idea!._id);
 

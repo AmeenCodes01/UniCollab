@@ -18,8 +18,12 @@ export default function Providers({children}: {children: React.ReactNode}) {
       <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
         {/* Show AuthScreen for unauthenticated users */}
         <Unauthenticated>
-          <div className="w-full h-[100%] flex flex-col mx-auto justify-center items-center gap-4">
+          <div className="w-full h-[100%] px-4 flex flex-col mx-auto text-center justify-center items-center gap-2">
             <h1 className="text-6xl font-bold">UniCollab</h1>
+            <p className="sm:text-xl text-md text-primary italic">A space for Reading students to share ideas, find teammates, and build projects together
+
+      </p>
+
             <AuthScreen />
           </div>
         </Unauthenticated>

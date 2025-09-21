@@ -5,15 +5,16 @@ import {Button} from "@/components/ui/button";
 type Props = {
   onPress: (type: "saved") => void;
   disabled: boolean;
+  saved?:boolean
 };
 
-function SaveLaterBtn({onPress, disabled}: Props) {
+function SaveLaterBtn({onPress, disabled,saved}: Props) {
   return (
     <Button
       onClick={() => onPress("saved")}
       variant={"outline"}
-      disabled={disabled}>
-      Save for later
+      disabled={saved || disabled}>
+     {saved?"Saved":" Save for later"}
     </Button>
   );
 }

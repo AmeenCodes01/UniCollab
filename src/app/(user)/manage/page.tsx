@@ -19,7 +19,6 @@ async function Manage() {
     {token}
   )) as (Doc<"ideas"> & {type: "interested" | "saved" | "member" | "author"})[];
 
-  console.log(ideas, "ideas");
   return (
     <div className="w-full h-full pt-[30px] justify-center items-start flex  ">
       <ProjectManage data={ideas} />

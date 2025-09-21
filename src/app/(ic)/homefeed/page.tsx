@@ -1,3 +1,4 @@
+
 import React from "react";
 
 import {fetchQuery} from "convex/nextjs";
@@ -13,8 +14,11 @@ async function HomeFeed() {
     {status: "open"},
     {token}
   );
-
   //what about the ideas user is already a team member of.
+
+  //change to client
+
+  //get saved & match
   return (
     <div className=" w-full h-[100%] flex flex-col  mx-auto   ">
       <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 mb-6">

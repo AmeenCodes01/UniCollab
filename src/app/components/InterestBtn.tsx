@@ -8,21 +8,27 @@ import SaveLaterBtn from "./SaveLaterBtn";
 import {navigate} from "@/actions/manageRefresh";
 import {emailInterest} from "@/lib/emailInterest";
 import {useClipboardWithToast} from"@/hooks/useCopyEmail"
+import { useState } from "react";
 const InterestBtn = ({
   title,
   ideaId,
   mode,
   authId,
+  disableInterest,
+  disableSave
 }: {
   title: string;
   ideaId: Id<"ideas">;
   mode?: string;
   authId: Id<"users">;
+  disableInterest?:boolean;
+  disableSave?:boolean;
 }) => {
   const express = useMutation(api.interested.accept);
   const del = useMutation(api.interested.reject);
-
   const user = useQuery(api.users.current);
+  const isUser = ( user?._id ? user._id === authId : false)
+  const [txt,setTxt]=useState("I'm Interested")
   const {copyToClipboard}= useClipboardWithToast()
   const onPress = (type: "interested" | "saved" | "del") => {
     type !== "del"
@@ -38,8 +44,10 @@ const InterestBtn = ({
               alert(result?.message);
             } else {
               if (type === "interested") {
-                emailInterest(title, user?.email as string);
+            //    emailInterest(title, user?.email as string);
                 copyToClipboard(user?.email as string);
+                setTxt("Email copied to clipboard!")
+                setTimeout(()=>setTxt("I'm Interested"),2000)
               }
             }
           })
@@ -47,25 +55,33 @@ const InterestBtn = ({
     type == "del" || mode == "del" ? navigate() : null;
   };
   //NEED TO SEND TYPE
-  console.log(authId, user?._id)
   return (
     <>
-      <Button
+{!isUser ? 
+<>
+
+<Button
         onClick={() => onPress("interested")}
         variant={"default"}
-        disabled={user?._id ? user._id === authId : false}>
-        I'm Interested
+        disabled={disableInterest && disableInterest == true || isUser}>
+        { (!isUser && disableInterest) ?"Interest shown!" :txt  }
       </Button>
       {mode === "del" ? (
         <Button variant={"destructive"} onClick={() => onPress("del")}>
           Delete
         </Button>
       ) : (
-        <SaveLaterBtn
+        <>
+        {disableInterest ==false || disableInterest==undefined  ?<SaveLaterBtn
           onPress={onPress}
-          disabled={user?._id ? user._id === authId : false}
-        />
+          saved = {disableSave}
+          disabled={isUser || disableInterest&&disableInterest==true ?true:false}
+          />:null}
+          </>
       )}
+      </>
+      : null
+      }
     </>
   );
 };

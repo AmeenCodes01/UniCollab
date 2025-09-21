@@ -30,70 +30,69 @@ function PendRejSheet({ idea }: { idea: Doc<"ideas"> }) {
   console.log(pathname);
   //   const token = await getAuthToken()
 
-  const Content = () => {
-    if (pathname == "/manage") { 
-      return (
-        <>
-          {idea.status == "rejected" ? (
-            <div>
-              <span>{idea.rejectedReason}</span>
-            </div>
-          ) : (
-            <div>
-              Awaiting Approval. If rejected, the reason will be shown here.
-            </div>
-          )}
-        </>
-      );
-    }
+  // const Content = () => {
+  //   if (pathname == "/manage") { 
+  //     return (
+  //       <>
+  //         {idea.status == "rejected" ? (
+  //           <div>
+  //             <span>{idea.rejectedReason}</span>
+  //           </div>
+  //         ) : (
+  //           <div>
+  //             Awaiting Approval. If rejected, the reason will be shown here.
+  //           </div>
+  //         )}
+  //       </>
+  //     );
+  //   }
 
-    if (pathname == "/approval") {
-      return (
-        <div className="flex gap-4 flex-col">
-          <Button
-            className="w-full"
-            onClick={() => {
-              action({ status: "open", ideaId: idea._id });
-              navigateApproval();
-            }}
-          >
-            Approve
-          </Button>
-          <Input
-            value={reason}
-            onChange={(e) => setReason(e.target.value)}
-            placeholder="Give a reason for rejecting."
-          />
-          <Button
-            variant={"destructive"}
-            onClick={() => {
-              if (reason !== "") {
-                action({
-                  status: "rejected",
-                  ideaId: idea._id,
-                  rejectedReason: reason,
-                });
-                navigateApproval();
-              } else {
-                alert("please give a reason.");
-              }
-            }}
-          >
-            Reject
-          </Button>
-        </div>
-      );
-    }
-  };
+  //   if (pathname == "/approval") {
+  //     return (
+  //       <div className="flex gap-4  flex-col">
+  //         <Button
+  //           className="w-full"
+  //           onClick={() => {
+  //             action({ status: "open", ideaId: idea._id });
+  //             navigateApproval();
+  //           }}
+  //         >
+  //           Approve
+  //         </Button>
+  //         <Input
+  //           value={reason}
+  //           onChange={(e) => setReason(e.target.value)}
+  //           placeholder="Give a reason for rejecting."
+  //         />
+  //         <Button
+  //           variant={"destructive"}
+  //           onClick={() => {
+  //             if (reason !== "") {
+  //               action({
+  //                 status: "rejected",
+  //                 ideaId: idea._id,
+  //                 rejectedReason: reason,
+  //               });
+  //               navigateApproval();
+  //             } else {
+  //               alert("please give a reason.");
+  //             }
+  //           }}
+  //         >
+  //           Reject
+  //         </Button>
+  //       </div>
+  //     );
+  //   }
+  // };
 
-  const user = useQuery(api.users.current);
   return (
     <Sheet>
       <SheetTrigger>
         <MoreHorizontal className="h-4 w-4" />
       </SheetTrigger>
       <SheetDescription></SheetDescription>
-      <SheetContent>
+      <SheetContent className="flex flex-col">
         <SheetTitle></SheetTitle>
 
         {pathname == "/manage" ? (
@@ -109,9 +108,9 @@ function PendRejSheet({ idea }: { idea: Doc<"ideas"> }) {
             )}
           </>
         ) : (
-          <div className="flex gap-4 flex-col">
+          <div className="flex gap-4  mt-auto flex-col">
             <Button
-              className="w-full"
+              className="w-full  "
               onClick={() => {
                 action({ status: "open", ideaId: idea._id });
                 navigateApproval();

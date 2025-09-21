@@ -102,8 +102,7 @@ export const getAllIdeas = query({
         await db
             .query("ideas")
             .withIndex(("by_status"), i=> i.eq("status", status)    
-          )
-            .collect()
+          ).order("desc").collect()
         :
         //archive
         await db
