@@ -13,7 +13,7 @@ return <span className=" self-center pt-8 text-2xl mx-auto">Unauthorized</span>
   }
   return (
     <div>
-      <DataTable columns={pendRejcols} data={ideas} />
+      <DataTable columns={pendRejcols} data={ideas?? []} />
     </div>
   );
 }
