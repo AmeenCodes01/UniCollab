@@ -1,6 +1,6 @@
 "use client";
 import React, {useState} from "react";
-import {Search, Code} from "lucide-react";
+import {Search, Code, SearchCode} from "lucide-react";
 import InterestBtn from "@/app/components/InterestBtn";
 import IdeaCard from "@/app/components/IdeaCard";
 import {Doc, Id} from "../../../../../convex/_generated/dataModel";
@@ -52,12 +52,12 @@ function IdeasList({
             className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
               filter === "project"
                 ? "bg-blue-100 text-blue-700"
-                : "hover:bg-gray-100"
+                : ""
             }`}
             //  onClick={() => setFilter("project")}
           >
-            <Code size={20} />
-            Projects
+            <SearchCode size={20} />
+            
           </button>
         </div>
       </div>
