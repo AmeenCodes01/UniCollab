@@ -34,6 +34,7 @@ Although the collaboration could not continue (and the project was paused before
   * Core functionality (posting, joining, saving projects).
   * Authentication and backend integration.
   * User flows for idea sharing and collaboration.
+  * Cohesive tracking of projects & student activity for teacher monitoring. ( feature requested by professors) 
 
 * **Pending/Incomplete**:
 
